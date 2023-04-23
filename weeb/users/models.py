@@ -13,6 +13,8 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, editable=False)
     nickname = models.CharField(max_length=32, blank=False, null=False)
+    biography = models.CharField(max_length=256, blank=True, null=True)
+    avatar = models.ImageField(null=True, default='avatar-default.svg')
 
     def __str__(self):
         return self.user.username
