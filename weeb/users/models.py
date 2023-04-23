@@ -10,7 +10,8 @@ class User(AbstractUser):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, editable=False)
+    nickname = models.CharField(max_length=32, blank=False, null=False)
 
     def __str__(self):
         return self.user.username
