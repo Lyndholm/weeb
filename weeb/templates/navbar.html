@@ -13,21 +13,28 @@
             {% if request.user.is_authenticated %}
             <div class="header__user">
                 <div class="avatar avatar--medium active">
-                    <img src="{{request.user.profile.avatar.url}}" />
+                    <img src="{{request.user.profile.avatar.url}}"/>
                 </div>
                 <p>{{request.user.profile.nickname}} <span>@{{request.user.username}}</span></p>
-                <a href="{% url 'logout' %}">Logout</a>
+                <button class="dropdown-button">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+                    </svg>
+                </button>
             </div>
 
             <!-- Not Logged In -->
-            {% else %}            
+            {% else %}
             <a href="{% url 'login' %}">
-                <img src="{% static 'images/avatar-default.svg' %}" />
+                <img src="{% static 'images/avatar-default.svg' %}"/>
                 <p>Login</p>
             </a>
 
             {% endif %}
-               
+
+            <div class="dropdown-menu">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
         </nav>
     </div>
 </header>

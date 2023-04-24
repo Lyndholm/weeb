@@ -147,9 +147,7 @@ a {
     right: 3.5px;
 }
 
-/*==============================
-=>  Header Section
-================================*/
+/*========== header ==========*/
 
 .header {
     padding: 1.5rem;
@@ -218,4 +216,53 @@ a {
     width: 1.6rem;
     height: 1.6rem;
     fill: var(--color-dark-light);
+}
+
+/*========== dropdown ==========*/
+
+.dropdown-menu {
+    z-index: 111;
+    position: absolute;
+    top: 5rem;
+    right: 0.5rem;
+    background: var(--color-dark-light);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    padding: 1.2rem 4rem;
+    display: block;
+    color: var(--color-light) !important;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--color-dark-medium);
+}
+
+.dropdown-menu>a:not(:last-child) {
+    border-bottom: 1px solid var(--color-dark-medium);
+}
+
+.dropdown-menu a svg {
+    fill: var(--color-light);
+}
+
+.dropdown-button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.dropdown-button:hover svg {
+    fill: var(--color-main);
 }
