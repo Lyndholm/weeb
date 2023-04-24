@@ -1,8 +1,6 @@
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 SECRET_KEY = 'django-insecure-tu&6pd9&u_myzdqhw+-1kk#arb0m364-kh1xi9hu9j3)g3xbur'
@@ -13,8 +11,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,7 +18,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'users.apps.UsersConfig',
 ]
 
@@ -43,7 +38,9 @@ ROOT_URLCONF = 'weeb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -57,8 +54,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'weeb.wsgi.application'
-
-
 
 
 DATABASES = {
@@ -90,8 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -99,8 +92,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
 
 
 STATIC_URL = 'static/'
