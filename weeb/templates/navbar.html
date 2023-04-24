@@ -1,0 +1,33 @@
+{% load static %}
+
+<header class="header">
+    <div class="container">
+        <a href="{% url 'placeholder' %}" class="header__logo">
+            <img src="{% static 'images/logo.webp' %}" />
+            <h1>weeb.art</h1>
+        </a>
+
+        <nav class="header__menu">
+
+            <!-- Logged In -->
+            {% if request.user.is_authenticated %}
+            <div class="header__user">
+                <div class="avatar avatar--medium active">
+                    <img src="{{request.user.profile.avatar.url}}" />
+                </div>
+                <p>{{request.user.profile.nickname}} <span>@{{request.user.username}}</span></p>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+
+            <!-- Not Logged In -->
+            {% else %}            
+            <a href="{% url 'login' %}">
+                <img src="{% static 'images/avatar-default.svg' %}" />
+                <p>Login</p>
+            </a>
+
+            {% endif %}
+               
+        </nav>
+    </div>
+</header>
