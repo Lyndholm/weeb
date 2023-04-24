@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import User, UserProfile
+
+from .models import Profile, User
 
 
 @admin.register(User)
@@ -8,7 +9,7 @@ class UserModelAdmin(admin.ModelAdmin):
         return False
 
 
-@admin.register(UserProfile)
-class UserProfileModelAdmin(admin.ModelAdmin):
+@admin.register(Profile)
+class ProfileModelAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False

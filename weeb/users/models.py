@@ -1,6 +1,7 @@
 import uuid
-from django.db import models
+
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class User(AbstractUser):
@@ -10,8 +11,10 @@ class User(AbstractUser):
     created_at = models.DateTimeField('Registration date', auto_now_add=True)
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, editable=False)
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, editable=False
+    )
     nickname = models.CharField(max_length=32, blank=False, null=False)
     biography = models.CharField(max_length=256, blank=True, null=True)
     avatar = models.ImageField(null=True, default='avatar-default.svg')
