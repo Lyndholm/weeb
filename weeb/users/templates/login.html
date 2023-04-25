@@ -1,12 +1,40 @@
-<h1>Login</h1>
+{% extends 'main.html' %}
 
-<div>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-    
-        <input type="submit" value="Login">
-    </form>
+{% block content %}
 
-    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-</div>
+<main class="auth layout">
+    <div class="container">
+        <div class="layout__box">
+            <div class="layout__boxHeader">
+                <div class="layout__boxTitle">
+                    <h3>Вход</h3>
+                </div>
+            </div>
+            <div class="layout__body">
+                <h2 class="auth__tagline"></h2>
+
+                <form class="form" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <label>Имя пользователя или Email</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form__group">
+                        <label for="password">Пароль</label>
+                        {{form.password}}
+                    </div>
+
+                    <button class="btn btn--main" type="submit">Войти</button>
+                </form>
+
+                <div class="auth__action">
+                    <p>Ещё не зарегистрированы?</p>
+                    <a href="{% url 'register' %}" class="btn btn--link">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

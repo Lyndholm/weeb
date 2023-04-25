@@ -68,6 +68,68 @@ a {
     margin: auto;
 }
 
+.btn {
+    background-color: transparent;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    font-weight: 500;
+}
+
+.btn--link {
+    border-radius: 0;
+    padding: 0;
+    color: var(--color-main);
+    box-shadow: none;
+}
+
+.btn--link:hover {
+    text-decoration: underline;
+}
+
+.btn--main {
+    background-color: var(--color-main);
+    color: var(--color-dark);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn--dark {
+    background-color: var(--color-dark-light);
+    color: var(--color-light);
+}
+
+.btn>svg {
+    fill: currentColor;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.btn--pill {
+    border-radius: 10rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 6px 2.5rem;
+    color: var(--color-main);
+    background: transparent;
+    border: 2px solid var(--color-main);
+}
+
+.action-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
 .scroll::-webkit-scrollbar {
     width: 0.6rem;
     background-color: rgb(41, 41, 46);
@@ -265,4 +327,189 @@ a {
 
 .dropdown-button:hover svg {
     fill: var(--color-main);
+}
+
+/*========== auth ==========*/
+
+.auth__tagline {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-main);
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.auth .layout__boxHeader {
+    text-align: center;
+    justify-content: center;
+}
+
+.auth__action {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.auth .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*========== layout ==========*/
+
+.layout {
+    margin-top: 2.4rem;
+}
+
+.layout>.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.layout--3>.container>div:first-child {
+    flex-basis: 18%;
+    max-width: 22.5rem;
+}
+
+.layout--3>.container>div:nth-child(2) {
+    flex-basis: 50%;
+}
+
+.layout--3>.container>div:last-child {
+    flex-basis: 25%;
+}
+
+.layout--2>.container>div:first-child {
+    flex-basis: 72%;
+}
+
+.layout--2>.container>div:last-child {
+    flex-basis: 25%;
+}
+
+/*========== layout box ==========*/
+
+.layout__box {
+    width: 90%;
+    max-width: 48rem;
+    min-height: 40rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -46%);
+    background-color: var(--color-dark);
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.layout__boxHeader {
+    display: flex;
+    padding: 1.5rem;
+    background-color: var(--color-dark-light);
+}
+
+.layout__boxTitle {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.layout__boxTitle h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-light);
+}
+
+.layout__boxTitle svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--color-main);
+}
+
+.layout__body {
+    margin: 3rem;
+}
+
+@media screen and (max-width: 900px) {
+    .layout--3>.container>div:nth-child(2) {
+        flex-basis: 100%;
+    }
+}
+
+/*========== forms ==========*/
+
+.form__group {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.form__split {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form__group label {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form__group input,
+.form__group textarea,
+.form__group select {
+    background: transparent;
+    border: 1px solid var(--color-dark-light);
+    padding: 1rem;
+    border-radius: 3px;
+    width: 100%;
+    color: var(--color-light);
+    font-weight: 500;
+    outline: none;
+}
+
+.form__group input:focus,
+.form__group textarea:focus {
+    border-color: var(--color-main);
+}
+
+.form__group textarea {
+    background: transparent;
+    height: 10rem;
+    resize: none;
+}
+
+.form__group select {
+    color: var(--color-gray);
+    font-weight: 400;
+}
+
+.form__group select option {
+    background-color: var(--color-dark-light);
+    color: var(--color-light);
+    padding: 0 10rem;
+}
+
+.form__action {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3rem;
+}
+
+.form__hide {
+    position: absolute;
+    left: -9999px;
+}
+
+.form__avatar label {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-main);
+    cursor: pointer;
+}
+
+.form__avatar label:hover {
+    text-decoration: underline;
 }
