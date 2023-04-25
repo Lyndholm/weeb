@@ -33,6 +33,9 @@
             {% endif %}
 
             <div class="dropdown-menu">
+                {% if request.user.is_superuser %}
+                <a href="{% url 'admin:index' %}">Admin</a>
+                {% endif %}
                 <a href="{% url 'logout' %}">Logout</a>
             </div>
         </nav>
