@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect, render
@@ -13,6 +14,10 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('placeholder')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Неверное имя пользователя или пароль.')
+        return super().form_invalid(form)
 
 
 class CustomLogoutView(LogoutView):

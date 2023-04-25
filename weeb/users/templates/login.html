@@ -13,6 +13,16 @@
             <div class="layout__body">
                 <h2 class="auth__tagline"></h2>
 
+                {% if messages %}
+                <div class="error-messages-block">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
                 <form class="form" method="POST">
                     {% csrf_token %}
 

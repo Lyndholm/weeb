@@ -130,6 +130,25 @@ a {
     cursor: pointer;
 }
 
+.error-messages-block {
+    margin: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error-messages-block ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error-messages-block li {
+    margin-bottom: 5px;
+}
+
 .scroll::-webkit-scrollbar {
     width: 0.6rem;
     background-color: rgb(41, 41, 46);
