@@ -195,15 +195,15 @@ a {
 }
 
 .avatar.avatar--small:after {
-    width: 0.7rem;
-    height: 0.7rem;
+    width: 1rem;
+    height: 1rem;
     bottom: 0px;
     right: -6px;
 }
 
 .avatar.avatar--medium img {
-    width: 3.6rem;
-    height: 3.6rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
 }
 
@@ -216,8 +216,8 @@ a {
 
 .avatar.avatar--large img {
     display: block;
-    width: 8rem;
-    height: 8rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
 }
 
@@ -531,4 +531,49 @@ a {
 
 .form__avatar label:hover {
     text-decoration: underline;
+}
+
+/*========== profile ==========*/
+
+.profile {
+    margin-bottom: 3rem;
+}
+
+.profile__avatar {
+    text-align: center;
+}
+
+.profile__info {
+    text-align: center;
+}
+
+.profile__info h3 {
+    font-size: 2rem;
+    color: var(--color-light);
+    font-weight: 400;
+}
+
+.profile__info p {
+    color: var(--color-main);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.profile__about {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.profile__about h3 {
+    text-transform: uppercase;
+    color: var(--color-dark-light);
+    margin-bottom: 0.5rem;
+}
+
+.profile-page {
+    margin-bottom: 1.5rem;
+}
+
+.profile-page h2 {
+    color: var(--color-dark-light);
 }

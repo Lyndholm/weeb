@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="profile-page layout layout--2">
+    <div class="container">
+        <div class="profile">
+            <div class="profile__avatar">
+                <div class="avatar avatar--large active">
+                    <img src="{{user.profile.avatar.url}}" />
+                </div>
+            </div>
+            <div class="profile__info">
+                <h3>{{user.profile.nickname}}</h3>
+                <p>@{{user.username}}</p>
+                {% if request.user == user %}
+                <a href="" class="btn btn--main btn--pill">Редактировать профиль</a>
+                {% endif %}
+            </div>
+            <div class="profile__about">
+                <h3 >О себе</h3>
+                <p>{{user.profile.biography|default_if_none:"Пользователь ничего не указал о себе."}}</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

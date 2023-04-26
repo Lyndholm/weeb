@@ -1,11 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 
 from .forms import CustomUserCreationForm
+from .models import User
 
 
 class CustomLoginView(LoginView):
@@ -51,6 +54,19 @@ class RegistrationView(FormView):
             return redirect('placeholder')
 
         return super().get(*args, **kwargs)
+
+
+class MyProfile(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profile.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class ProfilePage(DetailView):
+    model = User
+    template_name = 'profile.html'
 
 
 def placeholder_view(request):
