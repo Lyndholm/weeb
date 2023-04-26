@@ -38,6 +38,14 @@ class RegistrationView(FormView):
 
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            'Введенные данные не прошли проверку. Пожалуйста, проверьте и исправьте ошибки.',
+        )
+
+        return super().form_invalid(form)
+
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('placeholder')

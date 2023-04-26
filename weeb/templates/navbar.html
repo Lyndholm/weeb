@@ -9,11 +9,11 @@
 
         <nav class="header__menu">
 
-            <!-- Logged In -->
             {% if request.user.is_authenticated %}
+            <!-- Logged In -->
             <div class="header__user">
                 <div class="avatar avatar--medium active">
-                    <img src="{{request.user.profile.avatar.url}}"/>
+                    <img src="{{request.user.profile.avatar.url}}" />
                 </div>
                 <p>{{request.user.profile.nickname}} <span>@{{request.user.username}}</span></p>
                 <button class="dropdown-button">
@@ -23,21 +23,22 @@
                 </button>
             </div>
 
-            <!-- Not Logged In -->
-            {% else %}
-            <a href="{% url 'login' %}">
-                <img src="{% static 'images/avatar-default.svg' %}"/>
-                <p>Login</p>
-            </a>
-
-            {% endif %}
-
             <div class="dropdown-menu">
                 {% if request.user.is_superuser %}
                 <a href="{% url 'admin:index' %}">Admin</a>
                 {% endif %}
                 <a href="{% url 'logout' %}">Logout</a>
             </div>
+
+            {% else %}
+            <!-- Not Logged In -->
+            <a href="{% url 'login' %}">
+                <img src="{% static 'images/avatar-default.svg' %}" />
+                <p>Login</p>
+            </a>
+
+            {% endif %}
+
         </nav>
     </div>
 </header>

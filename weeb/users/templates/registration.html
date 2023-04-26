@@ -13,6 +13,16 @@
             <div class="layout__body">
                 <h2 class="auth__tagline"></h2>
 
+                {% if messages %}
+                <div class="error-messages-block">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
                 <form class="form" method="POST">
                     {% csrf_token %}
 
@@ -27,6 +37,8 @@
                     <div class="form__group">
                         <label>Пароль</label>
                         {{form.password1}}
+                        <span style="font-size: 0.8em; color: #999;">Пароль должен быть не менее 8 символов, не похож на
+                            имя пользователя, не содержит только цифры, не слишком простой.</span>
                     </div>
                     <div class="form__group">
                         <label>Подтверждение пароля</label>
