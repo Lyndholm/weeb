@@ -14,7 +14,7 @@
                 <h3>{{user.profile.nickname}}</h3>
                 <p>@{{user.username}}</p>
                 {% if request.user == user %}
-                <a href="" class="btn btn--main btn--pill">Редактировать профиль</a>
+                <a href="{% url 'profile-update' %}" class="btn btn--main btn--pill">Редактировать профиль</a>
                 {% endif %}
             </div>
             <div class="profile__about">

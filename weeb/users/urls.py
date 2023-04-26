@@ -5,6 +5,7 @@ from .views import (
     CustomLogoutView,
     MyProfile,
     ProfilePage,
+    ProfileUpdate,
     RegistrationView,
     placeholder_view,
 )
@@ -16,6 +17,7 @@ urlpatterns = [
 
     path('me/', MyProfile.as_view(), name='my-profile'),
     path('profile/<uuid:pk>/', ProfilePage.as_view(), name='user-profile'),
+    path('profile-update/', ProfileUpdate.as_view(), name='profile-update'),
 
     path('', placeholder_view, name='placeholder'),
 ]

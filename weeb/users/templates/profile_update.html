@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="update-account layout">
+    <div class="container">
+        <div class="layout__box">
+            <div class="layout__boxHeader">
+                <div class="layout__boxTitle">
+                    <a href="{% url 'my-profile' %}">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 32 32">
+                            <path
+                                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                            </path>
+                        </svg>
+                    </a>
+                    <h3>Обновление профиля</h3>
+                </div>
+            </div>
+            <div class="layout__body">
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <div class="avatar" style="width: 25rem; height: 25rem; margin-left: 19%;">
+                            <img id="avatar-preview" src="{{form.instance.avatar.url}}">
+                        </div>
+
+                        <input type="file" id="avatar-input" name="{{ form.avatar.name }}" style="display: none;">
+                        <button id="avatar-button" class="btn btn--main btn--pill" type="button"
+                            style="margin-left: 35%;">Изменить</button>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="profile_pic">Никнейм</label>
+                        {{form.nickname}}
+                    </div>
+
+                    <div class="form__group">
+                        <label for="profile_pic">О себе</label>
+                        {{form.biography}}
+                    </div>
+
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="{% url 'my-profile' %}">Отмена</a>
+                        <button class="btn btn--main" type="submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarButton = document.getElementById('avatar-button');
+        const avatarPreview = document.getElementById('avatar-preview');
+
+        avatarButton.addEventListener('click', () => {
+            avatarInput.click();
+        });
+
+        avatarInput.addEventListener('change', () => {
+            const file = avatarInput.files[0];
+            const reader = new FileReader(); // TODO: Add validation for file types. Only images are allowed
+
+            reader.addEventListener('load', () => {
+                avatarPreview.src = reader.result;
+                avatarPreview.style.display = 'block';
+            });
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                avatarPreview.style.display = 'none';
+            }
+        });
+    </script>
+
+</main>
+
+{% endblock content %}

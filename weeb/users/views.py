@@ -2,13 +2,14 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 
-from .forms import CustomUserCreationForm
-from .models import User
+from .forms import CustomUserCreationForm, ProfileUpdateForm
+from .models import Profile, User
 
 
 class CustomLoginView(LoginView):
@@ -67,6 +68,22 @@ class MyProfile(LoginRequiredMixin, DetailView):
 class ProfilePage(DetailView):
     model = User
     template_name = 'profile.html'
+
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileUpdateForm
+    template_name = 'profile_update.html'
+    success_url = reverse_lazy('my-profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def dispatch(self, request, *args, **kwargs):
+        profile = self.get_object()
+        if profile != request.user.profile:
+            raise Http404 # TODO: Throw a 403 error or something else ???
+        return super().dispatch(request, *args, **kwargs)
 
 
 def placeholder_view(request):
