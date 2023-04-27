@@ -11,13 +11,22 @@ class User(AbstractUser):
     created_at = models.DateTimeField('Registration date', auto_now_add=True)
 
 
+def uploaded_avatars_directory_path(instance, filename):
+    file_extension = filename.split('.')[-1]
+    return f'uploads/{instance.pk}.{file_extension}'
+
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, editable=False
     )
     nickname = models.CharField(max_length=32, blank=False, null=False)
     biography = models.CharField(max_length=256, blank=True, null=True)
-    avatar = models.ImageField(null=True, default='avatar-default.svg')
+    avatar = models.ImageField(
+        upload_to=uploaded_avatars_directory_path,
+        null=True,
+        default='avatar-default.svg',
+    )
 
     def __str__(self):
         return self.user.username
