@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, UpdateView
@@ -17,7 +17,7 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('placeholder')
+        return reverse_lazy('home-page')
 
     def form_invalid(self, form):
         messages.error(self.request, 'Неверное имя пользователя или пароль.')
@@ -31,7 +31,7 @@ class CustomLogoutView(LogoutView):
 class RegistrationView(FormView):
     form_class = CustomUserCreationForm
     template_name = 'registration.html'
-    success_url = reverse_lazy('placeholder')
+    success_url = reverse_lazy('home-page')
 
     def form_valid(self, form):
         user = form.save()
@@ -52,7 +52,7 @@ class RegistrationView(FormView):
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('placeholder')
+            return redirect('home-page')
 
         return super().get(*args, **kwargs)
 
@@ -82,9 +82,5 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         profile = self.get_object()
         if profile != request.user.profile:
-            raise Http404 # TODO: Throw a 403 error or something else ???
+            raise Http404  # TODO: Throw a 403 error or something else ???
         return super().dispatch(request, *args, **kwargs)
-
-
-def placeholder_view(request):
-    return render(request, 'main.html')
