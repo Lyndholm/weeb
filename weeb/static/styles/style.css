@@ -175,30 +175,9 @@ a {
     object-position: center;
 }
 
-.avatar::after {
-    content: "";
-    display: block;
-    position: absolute;
-    background-color: var(--color-gray);
-    z-index: 111;
-    border-radius: 50%;
-    border: 0.3rem solid var(--color-dark);
-}
-
-.avatar.active::after {
-    background-color: var(--color-success);
-}
-
 .avatar.avatar--small img {
     width: 2.8rem;
     height: 2.8rem;
-}
-
-.avatar.avatar--small:after {
-    width: 1rem;
-    height: 1rem;
-    bottom: 0px;
-    right: -6px;
 }
 
 .avatar.avatar--medium img {
@@ -207,25 +186,11 @@ a {
     border-radius: 50%;
 }
 
-.avatar.avatar--medium:after {
-    width: 0.7rem;
-    height: 0.7rem;
-    bottom: 0px;
-    right: -6px;
-}
-
 .avatar.avatar--large img {
     display: block;
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
-}
-
-.avatar.avatar--large:after {
-    width: 1rem;
-    height: 1rem;
-    bottom: 2px;
-    right: 3.5px;
 }
 
 /*========== header ==========*/

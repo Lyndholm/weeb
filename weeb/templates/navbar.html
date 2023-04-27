@@ -12,7 +12,7 @@
             {% if request.user.is_authenticated %}
             <!-- Logged In -->
             <div class="header__user">
-                <div class="avatar avatar--medium active">
+                <div class="avatar avatar--medium">
                     <img src="{{user.profile.avatar.url}}" />
                 </div>
                 <p>{{user.profile.nickname}} <span>@{{user.username}}</span></p>
