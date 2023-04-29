@@ -22,14 +22,14 @@
                 <form class="form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    <div class="form__group">
-                        <div class="avatar">
+                    <div class="form__group" style="text-align: center;">
+                        <div class="avatar avatar--large">
                             <img id="avatar-preview" src="{{form.instance.avatar.url}}">
                         </div>
 
                         <input type="file" id="avatar-input" name="{{ form.avatar.name }}" style="display: none;">
                         <button id="avatar-button" class="btn btn--main btn--pill" type="button"
-                            style="margin-left: 35%;">Изменить</button>
+                            style="margin-inline: 10%; margin-top: 10px;">Изменить</button>
                     </div>
 
                     <div class="form__group">
