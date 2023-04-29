@@ -7,7 +7,7 @@ from users.models import User
 class Artwork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user_published'
+        User, on_delete=models.CASCADE, related_name='artworks'
     )
     title = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=1024, null=True, blank=True)
@@ -25,7 +25,7 @@ class Artwork(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False)
     created_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, related_name='user_created'
+        User, on_delete=models.SET_NULL, null=True, related_name='created_tags'
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -44,7 +44,7 @@ class ImageFile(models.Model):
         upload_to=uploaded_images_directory_path, null=False, blank=False
     )
     uploaded_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user_uploaded'
+        User, on_delete=models.CASCADE, related_name='uploaded_image_files'
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
