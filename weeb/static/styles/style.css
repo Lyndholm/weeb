@@ -186,10 +186,16 @@ a {
     border-radius: 50%;
 }
 
-.avatar.avatar--large img {
-    display: block;
+.avatar.avatar--big img {
     width: 10rem;
     height: 10rem;
+    border-radius: 50%;
+}
+
+.avatar.avatar--large img {
+    display: block;
+    width: 22.5rem;
+    height: 22.5rem;
     border-radius: 50%;
 }
 
@@ -501,7 +507,7 @@ a {
 /*========== profile ==========*/
 
 .profile {
-    margin-bottom: 3rem;
+    margin: 3rem;
 }
 
 .profile__avatar {
