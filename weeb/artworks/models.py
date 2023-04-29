@@ -16,7 +16,7 @@ class Artwork(models.Model):
     file = models.ForeignKey(
         'ImageFile', on_delete=models.CASCADE, null=False, blank=False
     )
-    tags = models.ManyToManyField('Tag', related_name='artwork_tags', blank=True)
+    tags = models.ManyToManyField('Tag', related_name='artworks', blank=True)
 
     def __str__(self):
         return str(self.id)

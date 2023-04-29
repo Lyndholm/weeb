@@ -5,7 +5,7 @@
     <ul class="tags__list">
         {% for tag in popular_tags %}
         <li>
-            <a href="">{{tag.name}}<span>{{tag.artwork_tags.all.count|default:"0"}}</span></a>
+            <a href="">{{tag.name}}<span>{{tag.artworks.all.count|default:"0"}}</span></a>
         </li>
         {% endfor %}
 
