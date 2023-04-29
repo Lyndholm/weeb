@@ -1,0 +1,16 @@
+<div class="tags">
+    <div class="tags__header">
+        <h2>Популярные теги</h2>
+    </div>
+    <ul class="tags__list">
+        {% for tag in popular_tags %}
+        <li>
+            <a href="">{{tag.name}}<span>{{tag.artwork_tags.all.count|default:"0"}}</span></a>
+        </li>
+        {% endfor %}
+
+        <li>
+            <a href="">Всего тегов<span>{{all_tags_count}}</span></a>
+        </li>
+    </ul>
+</div>
