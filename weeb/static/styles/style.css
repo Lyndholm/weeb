@@ -377,11 +377,11 @@ a {
 }
 
 .layout--2>.container>div:first-child {
-    flex-basis: 72%;
+    flex-basis: 80%;
 }
 
 .layout--2>.container>div:last-child {
-    flex-basis: 25%;
+    flex-basis: 17.5%;
 }
 
 /*========== layout box ==========*/
