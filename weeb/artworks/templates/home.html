@@ -9,10 +9,12 @@
         {% include 'tags_component.html' %}
         <!-- Tags End -->
 
-        
+
         <!-- Artwork List Start -->
         <div class="artworkList">
-            {% include 'feed_component.html' %}
+            {% for artwork in artworks %}
+            {% include 'artwork_component.html' %}
+            {% endfor %}
         </div>
         <!-- Artwork List End -->
 
