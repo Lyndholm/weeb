@@ -22,7 +22,17 @@
                 <p>{{user.profile.biography|default_if_none:"Пользователь ничего не указал о себе."}}</p>
             </div>
         </div>
+
+        <h2 style="text-align: center; font-size: large; padding: 10px;">Арты пользователя</h2>
+        <div class="artworList-grid-container">
+            {% for artwork in user.artworks.all %}
+            {% include 'artwork_component.html' %}
+            {% endfor %}
+        </div>
+
     </div>
+
+
 </main>
 
 {% endblock content %}

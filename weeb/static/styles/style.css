@@ -63,9 +63,15 @@ a {
 
 /*========== components ==========*/
 .container {
-    max-width: 120rem;
+    max-width: 150rem;
     width: 90%;
     margin: auto;
+}
+
+@media (max-width: 767px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .btn {
@@ -545,6 +551,24 @@ a {
 
 /*========== artwork list ==========*/
 
+.artworkList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 480px) {
+    .artworkListArt {
+        grid-template-columns: 1fr;
+    }
+}
+
+.artworList-grid-container {
+    display: grid;
+    grid-gap: 2.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .artworkList__header {
     display: flex;
     justify-content: space-between;
@@ -569,6 +593,9 @@ a {
     background-color: var(--color-dark);
     border-radius: 1rem;
     padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr repeat(auto-fill, 1fr) 1fr;
+    gap: 2rem;
 }
 
 .artworkListArt__header {
