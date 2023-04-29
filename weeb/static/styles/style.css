@@ -422,12 +422,6 @@ a {
     margin: 3rem;
 }
 
-@media screen and (max-width: 900px) {
-    .layout--3>.container>div:nth-child(2) {
-        flex-basis: 100%;
-    }
-}
-
 /*========== forms ==========*/
 
 .form__group {
