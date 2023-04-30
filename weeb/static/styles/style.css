@@ -504,6 +504,11 @@ a {
     text-decoration: underline;
 }
 
+.form-field-help-text {
+    font-size: 0.8em;
+    color: #999;
+}
+
 /*========== profile ==========*/
 
 .profile {
