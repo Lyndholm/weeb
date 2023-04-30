@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
-from .models import Artwork, Tag
+from .forms import ArtworkForm
+from .models import Artwork, ImageFile, Tag
 
 
 def home_page(request):
@@ -17,3 +19,25 @@ def home_page(request):
     }
 
     return render(request, 'home.html', context)
+
+
+@login_required(login_url='login')
+def create_artwork(request):
+    form = ArtworkForm()
+    tags = Tag.objects.all()
+
+    if request.method == 'POST':
+        form = ArtworkForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            art = form.save(commit=False)
+            art.author = request.user
+            art.file = ImageFile.objects.create(
+                file=request.FILES.get('file'),
+                uploaded_by=request.user,
+            )
+            form.save()
+            return redirect('home-page')
+
+    context = {'form': form, 'tags': tags}
+    return render(request, 'artwork_create.html', context)

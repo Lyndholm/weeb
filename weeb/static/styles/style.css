@@ -556,8 +556,8 @@ a {
 
 .update-profile.layout .layout__box {
     max-width: 50rem;
-  }
-  
+}
+
 /*========== artwork list ==========*/
 
 .artworkList {
@@ -684,6 +684,10 @@ a {
     border-radius: 5rem;
     font-weight: 500;
     font-size: 1.3rem;
+}
+
+.create-artwork.layout .layout__box {
+    max-width: 68rem;
 }
 
 /*========== tags ==========*/
