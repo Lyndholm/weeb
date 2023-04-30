@@ -554,6 +554,10 @@ a {
     color: var(--color-dark-light);
 }
 
+.update-profile.layout .layout__box {
+    max-width: 50rem;
+  }
+  
 /*========== artwork list ==========*/
 
 .artworkList {
