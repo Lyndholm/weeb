@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import Http404
 from django.shortcuts import redirect, render
 
@@ -8,7 +8,17 @@ from .models import Artwork, ImageFile, Tag
 
 
 def home_page(request):
-    artworks = Artwork.objects.all().order_by('-published_at')
+    q = request.GET.get('query', '')
+
+    artworks = (
+        Artwork.objects.all()
+        .order_by('-published_at')
+        .filter(
+            Q(title__icontains=q)
+            | Q(description__icontains=q)
+            | Q(author__profile__nickname__iexact=q)
+        )
+    )
     all_tags_count = Tag.objects.all().count()
     popular_tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
         '-artworks_count'
