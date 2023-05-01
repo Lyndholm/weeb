@@ -21,6 +21,12 @@ def home_page(request):
     return render(request, 'home.html', context)
 
 
+def artwork_page(request, pk):
+    artwork = Artwork.objects.get(id=pk)
+    context = {'artwork': artwork}
+    return render(request, 'artwork.html', context)
+
+
 @login_required(login_url='login')
 def create_artwork(request):
     form = ArtworkForm()

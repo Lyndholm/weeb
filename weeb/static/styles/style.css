@@ -750,3 +750,119 @@ a {
         margin-bottom: 2.4rem;
     }
 }
+
+/*========== artwork page ==========*/
+
+.artwork-page {
+    background: var(--color-dark);
+    max-height: 87.5vh;
+    border-radius: 0.7rem;
+    overflow: auto;
+    position: relative;
+}
+
+@media screen and (max-width: 900px) {
+    .layout--2>.container>div:first-child {
+        flex-basis: 75%;
+        margin-right: 10px;
+    }
+}
+
+.artwork-top-bar {
+    background: var(--color-dark-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+    gap: 1rem;
+}
+
+.artwork-top-bar svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--color-light);
+    cursor: pointer;
+}
+
+.artwork__topLeft {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.artwork__topLeft h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-light);
+}
+
+.artwork__topLeft svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: var(--color-light);
+}
+
+.artwork__topRight {
+    display: flex;
+    column-gap: 1em;
+}
+
+.artwork__topRight svg {
+    fill: var(--color-main-light);
+}
+
+.artwork__header {
+    max-height: 30vh;
+    overflow-y: auto;
+    position: inherit;
+    background: var(--color-dark);
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+    .artwork__header {
+        top: 4.3rem;
+        padding-right: 2rem;
+    }
+}
+
+.artwork__box {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-height: 100vh;
+    /* overflow-y: auto; */
+    padding-bottom: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .room__box {
+        padding-left: 2.5rem;
+        padding-right: 2rem;
+        height: 80.5vh;
+        overflow-y: auto;
+        padding-bottom: 0;
+    }
+}
+
+.artwork__info {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.artwork__info h3 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--color-main);
+}
+
+.artwork__author {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}

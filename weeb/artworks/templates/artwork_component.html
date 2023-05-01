@@ -10,9 +10,9 @@
             <span>{{artwork.published_at|timesince}} ago</span>
         </div>
     </div>
-    <div class="artworkListArt__content">
-        <a href="">{{artwork.title}}</a>
-        <img style="object-fit: cover;" src="{{artwork.file.file.url}}">
+    <div class="artworkListArt__content" style="display: inline-grid;">
+        <a href="{% url 'artwork' artwork.id %}">{{artwork.title}}</a>
+        <a href="{% url 'artwork' artwork.id %}"><img src="{{artwork.file.file.url}}"></a>
     </div>
     <div class="artworkListArt__meta">
         <a href="" class="artworkListArt__tags">
