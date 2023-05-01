@@ -276,6 +276,46 @@ a {
     fill: var(--color-dark-light);
 }
 
+.header__search>label {
+    background-color: var(--color-dark-medium);
+    padding: 1.3rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 4px;
+}
+
+.header__search svg {
+    fill: var(--color-gray);
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+}
+
+.header__search input {
+    width: 30rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-light);
+}
+
+@media screen and (max-width: 800px) {
+    .header__search input {
+        width: 20rem;
+    }
+
+    .header>.container {
+        gap: 3rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header__search {
+        display: none;
+    }
+}
+
 /*========== dropdown ==========*/
 
 .dropdown-menu {
@@ -323,6 +363,23 @@ a {
 
 .dropdown-button:hover svg {
     fill: var(--color-main);
+}
+
+.mobile-menu {
+    margin-bottom: 3rem;
+}
+
+.mobile-menuItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .mobile-menu {
+        display: none;
+    }
 }
 
 /*========== auth ==========*/
@@ -382,6 +439,16 @@ a {
 
 .layout--2>.container>div:last-child {
     flex-basis: 17.5%;
+}
+
+@media screen and (max-width: 500px) {
+    .tags {
+        display: none;
+    }
+
+    .layout--2>.container>div:first {
+        flex-basis: 100%;
+    }
 }
 
 /*========== layout box ==========*/
@@ -562,7 +629,7 @@ a {
 
 .artworkList {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -763,7 +830,7 @@ a {
 
 @media screen and (max-width: 900px) {
     .layout--2>.container>div:first-child {
-        flex-basis: 75%;
+        flex-basis: 100%;
         margin-right: 10px;
     }
 }
