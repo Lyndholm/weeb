@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load artworks_extras %}
+
 {% block content %}
 
 <main class="layout layout--2">
@@ -27,7 +29,7 @@
             <div class="artworkList__header">
                 <div style="margin-right: 10px;">
                     <h2>Галерея артов</h2>
-                    <p>{{artworks.count}} артов доступно</p> <!-- TODO: Fix russian plural (арт, арта, артов) -->
+                    <p>{{artworks.count}} {{artworks.count|pluralize_ru:"арт,арта,артов"}} {{artworks.count|pluralize:"доступен,доступно"}}</p>
                 </div>
 
                 {% if request.user.is_authenticated %}
