@@ -1,3 +1,5 @@
+from functools import reduce
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import Http404
@@ -8,15 +10,17 @@ from .models import Artwork, ImageFile, Tag
 
 
 def home_page(request):
-    q = request.GET.get('query', '')
+    query = request.GET.get('query', '')
+    # query_tags = request.GET.get('tags', '').split(',')
+    # query_filter = reduce(lambda q, tag: q & Q(tags__name=tag), query_tags, Q())
 
     artworks = (
         Artwork.objects.all()
         .order_by('-published_at')
         .filter(
-            Q(title__icontains=q)
-            | Q(description__icontains=q)
-            | Q(author__profile__nickname__iexact=q)
+            Q(title__icontains=query)
+            | Q(description__icontains=query)
+            | Q(author__profile__nickname__iexact=query)
         )
     )
     all_tags_count = Tag.objects.all().count()
@@ -92,3 +96,8 @@ def delete_artwork(request, pk):
 
     context = {'obj': f'арт "{artwork.title}"'}
     return render(request, 'delete.html', context)
+
+
+def tags_page(request):
+    tags = Tag.objects.all()
+    return render(request, 'tags.html', {'tags': tags})

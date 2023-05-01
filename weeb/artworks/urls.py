@@ -8,4 +8,5 @@ urlpatterns = [
     path('artwork-create/', views.create_artwork, name='artwork-create'),
     path('artwork-edit/<uuid:pk>', views.edit_artwork, name='artwork-edit'),
     path('artwork-delete/<uuid:pk>/', views.delete_artwork, name='artwork-delete'),
+    path('tags/', views.tags_page, name='tags'),
 ]
