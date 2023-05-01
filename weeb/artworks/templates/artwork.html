@@ -19,7 +19,7 @@
 
                 {% if artwork.author == request.user %}
                 <div class="artwork__topRight">
-                    <a href="">
+                    <a href="{% url 'artwork-edit' artwork.id %}">
                         <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
                             xmlns="http://www.w3.org/2000/svg">
                             <g>

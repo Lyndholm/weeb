@@ -3,7 +3,7 @@ from django.db.models import Count
 from django.http import Http404
 from django.shortcuts import redirect, render
 
-from .forms import ArtworkForm
+from .forms import ArtworkCreateForm, ArtworkEditForm
 from .models import Artwork, ImageFile, Tag
 
 
@@ -30,11 +30,11 @@ def artwork_page(request, pk):
 
 @login_required(login_url='login')
 def create_artwork(request):
-    form = ArtworkForm()
+    form = ArtworkCreateForm()
     tags = Tag.objects.all()
 
     if request.method == 'POST':
-        form = ArtworkForm(request.POST, request.FILES)
+        form = ArtworkCreateForm(request.POST, request.FILES)
 
         if form.is_valid():
             art = form.save(commit=False)
@@ -48,6 +48,25 @@ def create_artwork(request):
 
     context = {'form': form, 'tags': tags}
     return render(request, 'artwork_create.html', context)
+
+
+@login_required(login_url='login')
+def edit_artwork(request, pk):
+    artwork = Artwork.objects.get(id=pk)
+    form = ArtworkEditForm(instance=artwork)
+
+    if request.user != artwork.author:
+        raise Http404  # TODO: Raise 403 Forbidden
+
+    if request.method == 'POST':
+        # TODO: Ability for editing artwork file?
+        form = ArtworkEditForm(request.POST, request.FILES, instance=artwork)
+        if form.is_valid():
+            artwork = form.save()
+            return redirect('artwork', pk=artwork.pk)
+
+    context = {'form': form}
+    return render(request, 'artwork_edit.html', context)
 
 
 @login_required(login_url='login')
