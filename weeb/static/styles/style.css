@@ -866,3 +866,7 @@ a {
     transition: all 0.3s ease-in-out;
     text-decoration: none;
 }
+
+.delete-item.layout .layout__box {
+    max-width: 68rem;
+}

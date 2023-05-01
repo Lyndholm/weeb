@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.http import Http404
 from django.shortcuts import redirect, render
 
 from .forms import ArtworkForm
@@ -47,3 +48,18 @@ def create_artwork(request):
 
     context = {'form': form, 'tags': tags}
     return render(request, 'artwork_create.html', context)
+
+
+@login_required(login_url='login')
+def delete_artwork(request, pk):
+    artwork = Artwork.objects.get(id=pk)
+
+    if request.user != artwork.author:
+        raise Http404  # TODO: Return 403 Forbidden
+
+    if request.method == 'POST':
+        artwork.file.delete()  # TODO: Also delete artwork file from storage (signals)
+        return redirect('home-page')
+
+    context = {'obj': f'арт "{artwork.title}"'}
+    return render(request, 'delete.html', context)
