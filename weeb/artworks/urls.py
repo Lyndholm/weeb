@@ -9,4 +9,5 @@ urlpatterns = [
     path('artwork-edit/<uuid:pk>', views.edit_artwork, name='artwork-edit'),
     path('artwork-delete/<uuid:pk>/', views.delete_artwork, name='artwork-delete'),
     path('tags/', views.tags_page, name='tags'),
+    path('tags-autocomplete/', views.TagsAutocmplete.as_view(), name='tags-autocomplete'),
 ]

@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
 <main class="create-artwork layout">
     <div class="container">
@@ -31,19 +33,10 @@
                         {{form.description}}
                     </div>
 
-                    <!-- TODO: Tags
                     <div class="form__group">
                         <label for="artwork_tags">Теги</label>
-                        <input type="text" name="tags" list="tags-list" placeholder="Выберите теги..."/>
-                        <datalist id="tags-list">
-                            <select id="artwork_tags">
-                                {% for tag in tags %}
-                                <option value="{{tag}}">{{tag}}</option>
-                                {% endfor %}
-                            </select>
-                        </datalist>
+                        {{form.tags}}
                     </div>
-                    -->
 
                     <div class="form__group">
                         <label for="artwork_file">Файл</label>
@@ -60,4 +53,8 @@
         </div>
     </div>
 </main>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+{{form.media}}
+
 {% endblock content %}

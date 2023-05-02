@@ -1,5 +1,4 @@
-from functools import reduce
-
+from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import Http404
@@ -11,8 +10,6 @@ from .models import Artwork, ImageFile, Tag
 
 def home_page(request):
     query = request.GET.get('query', '')
-    # query_tags = request.GET.get('tags', '').split(',')
-    # query_filter = reduce(lambda q, tag: q & Q(tags__name=tag), query_tags, Q())
 
     artworks = (
         Artwork.objects.all()
@@ -101,3 +98,13 @@ def delete_artwork(request, pk):
 def tags_page(request):
     tags = Tag.objects.all()
     return render(request, 'tags.html', {'tags': tags})
+
+
+class TagsAutocmplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Tag.objects.all()
+
+        if self.q:
+            return qs.filter(name__istartswith=self.q)
+
+        return qs

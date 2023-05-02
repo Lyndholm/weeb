@@ -1,3 +1,4 @@
+from dal import autocomplete
 from django import forms
 
 from .models import Artwork
@@ -13,6 +14,9 @@ class ArtworkCreateForm(forms.ModelForm):
             'description',
             'tags',
         )
+        widgets = {
+            'tags': autocomplete.ModelSelect2Multiple(url='tags-autocomplete'),
+        }
 
 
 class ArtworkEditForm(forms.ModelForm):
@@ -23,3 +27,6 @@ class ArtworkEditForm(forms.ModelForm):
             'description',
             'tags',
         )
+        widgets = {
+            'tags': autocomplete.ModelSelect2Multiple(url='tags-autocomplete'),
+        }
