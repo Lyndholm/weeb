@@ -54,7 +54,8 @@ def create_artwork(request):
                 file=request.FILES.get('file'),
                 uploaded_by=request.user,
             )
-            form.save()
+            art.save()
+            form.save_m2m()
             return redirect('home-page')
 
     context = {'form': form, 'tags': tags}
