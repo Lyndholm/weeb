@@ -42,7 +42,6 @@ def artwork_page(request, pk):
 @login_required(login_url='login')
 def create_artwork(request):
     form = ArtworkCreateForm()
-    tags = Tag.objects.all()
 
     if request.method == 'POST':
         form = ArtworkCreateForm(request.POST, request.FILES)
@@ -56,9 +55,9 @@ def create_artwork(request):
             )
             art.save()
             form.save_m2m()
-            return redirect('home-page')
+            return redirect('artwork', pk=art.id)
 
-    context = {'form': form, 'tags': tags}
+    context = {'form': form}
     return render(request, 'artwork_create.html', context)
 
 
