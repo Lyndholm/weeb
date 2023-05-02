@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 
 from .forms import ArtworkCreateForm, ArtworkEditForm
-from .models import Artwork, ImageFile, Tag
+from .models import Artwork, Tag
 
 
 def home_page(request):
@@ -47,14 +47,7 @@ def create_artwork(request):
         form = ArtworkCreateForm(request.POST, request.FILES)
 
         if form.is_valid():
-            art = form.save(commit=False)
-            art.author = request.user
-            art.file = ImageFile.objects.create(
-                file=request.FILES.get('file'),
-                uploaded_by=request.user,
-            )
-            art.save()
-            form.save_m2m()
+            art = form.save(request=request)
             return redirect('artwork', pk=art.id)
 
     context = {'form': form}
