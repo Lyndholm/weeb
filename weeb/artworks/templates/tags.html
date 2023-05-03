@@ -6,7 +6,7 @@
         <div class="layout__box">
             <div class="layout__boxHeader">
                 <div class="layout__boxTitle">
-                    <a href="{% url 'home-page' %}">
+                    <a href="{% url 'home' %}">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                             viewBox="0 0 32 32">
                             <path
@@ -19,7 +19,7 @@
             </div>
 
             <div class="tags-page layout__body">
-                <form class="header__search" method="GET" action="{% url 'home-page' %}">
+                <form class="header__search" method="GET" action="{% url 'home' %}">
                     <label>
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                             viewBox="0 0 32 32">
@@ -38,7 +38,7 @@
                     </li>
                     {% for tag in tags %}
                     <li>
-                        <a href="{% url 'home-page' %}?tags={{tag.name}}">{{tag.name}}
+                        <a href="{% url 'home' %}?tags={{tag.name}}">{{tag.name}}
                             <span>{{tag.artworks.all.count}}</span></a>
                     </li>
                     {% endfor %}

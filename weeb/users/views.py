@@ -17,7 +17,7 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('home-page')
+        return reverse_lazy('home')
 
     def form_invalid(self, form):
         messages.error(self.request, 'Неверное имя пользователя или пароль.')
@@ -31,7 +31,7 @@ class CustomLogoutView(LogoutView):
 class RegistrationView(FormView):
     form_class = CustomUserCreationForm
     template_name = 'registration.html'
-    success_url = reverse_lazy('home-page')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         user = form.save()
@@ -52,7 +52,7 @@ class RegistrationView(FormView):
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('home-page')
+            return redirect('home')
 
         return super().get(*args, **kwargs)
 

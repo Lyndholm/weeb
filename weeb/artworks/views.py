@@ -82,7 +82,7 @@ def delete_artwork(request, pk):
 
     if request.method == 'POST':
         artwork.file.delete()  # TODO: Also delete artwork file from storage (signals)
-        return redirect('home-page')
+        return redirect('home')
 
     context = {'obj': f'арт "{artwork.title}"'}
     return render(request, 'delete.html', context)
