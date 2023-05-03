@@ -79,7 +79,7 @@
             <ul class="tags__list">
                 {% for tag in artwork.tags.all %}
                 <li>
-                    <a href="">{{tag.name}}<span>{{tag.artworks.all.count|default:"0"}}</span></a>
+                    <a href="{% url 'search' %}?tags={{tag.id}}">{{tag.name}}<span>{{tag.artworks.all.count|default:"0"}}</span></a>
                 </li>
                 {% empty %}
                 <span>Арт без тегов</span>
