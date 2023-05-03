@@ -1,7 +1,7 @@
 from dal import autocomplete
+from django import http
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
-from django.http import Http404
 from django.shortcuts import redirect, render
 
 from .forms import ArtworkCreateForm, ArtworkEditForm
@@ -60,7 +60,7 @@ def edit_artwork(request, pk):
     form = ArtworkEditForm(instance=artwork)
 
     if request.user != artwork.author:
-        raise Http404  # TODO: Raise 403 Forbidden
+        raise http.Http404  # TODO: Raise 403 Forbidden
 
     if request.method == 'POST':
         # TODO: Ability for editing artwork file?
@@ -78,7 +78,7 @@ def delete_artwork(request, pk):
     artwork = Artwork.objects.get(id=pk)
 
     if request.user != artwork.author:
-        raise Http404  # TODO: Return 403 Forbidden
+        raise http.Http404  # TODO: Return 403 Forbidden
 
     if request.method == 'POST':
         artwork.file.delete()  # TODO: Also delete artwork file from storage (signals)
@@ -101,3 +101,18 @@ class TagsAutocmplete(autocomplete.Select2QuerySetView):
             return qs.filter(name__istartswith=self.q)
 
         return qs
+
+    def post(self, request, *args, **kwargs):
+        text = request.POST.get('text', None)
+
+        if text is None:
+            return http.HttpResponseBadRequest()
+
+        tag = Tag.objects.create(name=text, created_by=request.user)
+
+        return http.JsonResponse(
+            {
+                'id': tag.pk,
+                'text': self.get_selected_result_label(tag),
+            }
+        )
