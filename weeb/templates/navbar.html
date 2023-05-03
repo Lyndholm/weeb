@@ -24,9 +24,15 @@
             <!-- Logged In -->
             <div class="header__user">
                 <div class="avatar avatar--medium">
-                    <img src="{{request.user.profile.avatar.url}}" />
+                    <a href="{% url 'my-profile' %}">
+                        <img src="{{request.user.profile.avatar.url}}" />
+                    </a>
                 </div>
-                <p>{{request.user.profile.nickname}} <span>@{{request.user.username}}</span></p>
+                <p>{{request.user.profile.nickname}}
+                    <span><a href="{% url 'my-profile' %}"
+                            style="display: inline-block; color: var(--color-main); text-decoration: none;">@{{request.user.username}}
+                        </a></span>
+                </p>
                 <button class="dropdown-button">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                         <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
