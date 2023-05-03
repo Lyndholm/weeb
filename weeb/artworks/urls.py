@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('tags/', views.tags_page, name='tags'),
 
+    path('search/', views.search_page, name='search'),
+
     path(
         'autocomplete/tags-with-create-new/',
         views.TagsAutocomplete.as_view(create_field='name'),

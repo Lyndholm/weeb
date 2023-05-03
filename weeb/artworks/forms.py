@@ -2,7 +2,7 @@ from dal import autocomplete
 from django import forms
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from .models import Artwork, ImageFile
+from .models import Artwork, ImageFile, Tag
 
 
 class ArtworkCreateForm(forms.ModelForm):
@@ -52,3 +52,16 @@ class ArtworkEditForm(forms.ModelForm):
                 url='autocomplete-tags-with-create-new'
             ),
         }
+
+
+class SearchByTagsForm(forms.Form):
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=autocomplete.ModelSelect2Multiple(
+            url='autocomplete-tags-no-create-new',
+            attrs={
+                'data-placeholder': 'Поиск артов по тегам...',
+            },
+        ),
+        required=False,
+    )

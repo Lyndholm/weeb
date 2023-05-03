@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.shortcuts import redirect, render
 
-from .forms import ArtworkCreateForm, ArtworkEditForm
+from .forms import ArtworkCreateForm, ArtworkEditForm, SearchByTagsForm
 from .models import Artwork, Tag
 
 
@@ -90,13 +90,6 @@ def delete_artwork(request, pk):
     return render(request, 'delete.html', context)
 
 
-def tags_page(request):
-    tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
-        '-artworks_count'
-    )[:10]
-    return render(request, 'tags.html', {'tags': tags})
-
-
 class TagsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Tag.objects.all()
@@ -120,3 +113,25 @@ class TagsAutocomplete(autocomplete.Select2QuerySetView):
                 'text': self.get_selected_result_label(tag),
             }
         )
+
+
+def tags_page(request):
+    tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
+        '-artworks_count'
+    )[:10]
+
+    form = SearchByTagsForm(request.GET)
+    return render(request, 'tags.html', {'tags': tags, 'search_form': form})
+
+
+def search_page(request):
+    tag_query = request.GET.getlist('tags')
+
+    if tag_query:
+        artworks = Artwork.objects.filter(tags__id__in=tag_query).distinct()
+        for tag in tag_query:
+            artworks = artworks.filter(tags__id=tag)
+    else:
+        artworks = Artwork.objects.all()
+
+    return render(request, 'search.html', {'artworks': artworks})
