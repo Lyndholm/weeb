@@ -97,7 +97,7 @@ def tags_page(request):
     return render(request, 'tags.html', {'tags': tags})
 
 
-class TagsAutocmplete(autocomplete.Select2QuerySetView):
+class TagsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Tag.objects.all()
 

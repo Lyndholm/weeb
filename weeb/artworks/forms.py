@@ -17,7 +17,9 @@ class ArtworkCreateForm(forms.ModelForm):
             'tags',
         )
         widgets = {
-            'tags': autocomplete.ModelSelect2Multiple(url='autocomplete-tags'),
+            'tags': autocomplete.ModelSelect2Multiple(
+                url='autocomplete-tags-with-create-new'
+            ),
         }
 
     def save(self, request, commit=True):
@@ -46,5 +48,7 @@ class ArtworkEditForm(forms.ModelForm):
             'tags',
         )
         widgets = {
-            'tags': autocomplete.ModelSelect2Multiple(url='autocomplete-tags'),
+            'tags': autocomplete.ModelSelect2Multiple(
+                url='autocomplete-tags-with-create-new'
+            ),
         }

@@ -11,9 +11,15 @@ urlpatterns = [
     path('artwork/delete/<uuid:pk>/', views.delete_artwork, name='artwork-delete'),
 
     path('tags/', views.tags_page, name='tags'),
+
     path(
-        'autocomplete/tags/',
-        views.TagsAutocmplete.as_view(create_field='name'),
-        name='autocomplete-tags',
+        'autocomplete/tags-with-create-new/',
+        views.TagsAutocomplete.as_view(create_field='name'),
+        name='autocomplete-tags-with-create-new',
+    ),
+    path(
+        'autocomplete/tags-no-create-new/',
+        views.TagsAutocomplete.as_view(),
+        name='autocomplete-tags-no-create-new',
     ),
 ]
