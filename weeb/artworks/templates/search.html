@@ -1,12 +1,9 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-<main class="layout layout--2">
-    <div class="container">
+<main class="layout">
+    <div class="container" style="display: block;">
         {% include 'artwork_list.html' %}
-
-        {% include 'tags_component.html' %}
     </div>
 </main>
 {% endblock content %}

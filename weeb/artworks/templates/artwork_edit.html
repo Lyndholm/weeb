@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
 <main class="create-artwork layout">
     <div class="container">
@@ -31,12 +33,10 @@
                         {{form.description}}
                     </div>
 
-                    {% if form.file %}
                     <div class="form__group">
-                        <label for="artwork_file">Файл</label>
-                        {{form.file}}
-                    </div>                  
-                    {% endif %}
+                        <label for="artwork_tags">Теги</label>
+                        {{form.tags}}
+                    </div>
 
 
                     <div class="form__action">
@@ -48,4 +48,8 @@
         </div>
     </div>
 </main>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+{{form.media}}
+
 {% endblock content %}

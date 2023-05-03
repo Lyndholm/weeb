@@ -6,9 +6,7 @@ from users.models import User
 
 class Artwork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='artworks'
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='artworks')
     title = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=1024, null=True, blank=True)
     published_at = models.DateTimeField(auto_now_add=True)
@@ -17,6 +15,9 @@ class Artwork(models.Model):
         'ImageFile', on_delete=models.CASCADE, null=False, blank=False
     )
     tags = models.ManyToManyField('Tag', related_name='artworks', blank=True)
+
+    class Meta:
+        ordering = ['-published_at']
 
     def __str__(self):
         return str(self.id)
