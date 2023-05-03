@@ -9,17 +9,7 @@ from .models import Artwork, Tag
 
 
 def home_page(request):
-    query = request.GET.get('query', '')
-
-    artworks = (
-        Artwork.objects.all()
-        .order_by('-published_at')
-        .filter(
-            Q(title__icontains=query)
-            | Q(description__icontains=query)
-            | Q(author__profile__nickname__iexact=query)
-        )
-    )
+    artworks = Artwork.objects.all()
     all_tags_count = Tag.objects.all().count()
     popular_tags = (
         Tag.objects.annotate(artworks_count=Count('artworks'))
@@ -125,13 +115,20 @@ def tags_page(request):
 
 
 def search_page(request):
-    tag_query = request.GET.getlist('tags')
+    artworks = Artwork.objects.all()
+    query = request.GET.get('query', '')
+    tag_query = request.GET.getlist('tags', '')
+
+    if query:
+        artworks = artworks.filter(
+            Q(title__icontains=query)
+            | Q(description__icontains=query)
+            | Q(author__profile__nickname__iexact=query)
+        )
 
     if tag_query:
-        artworks = Artwork.objects.filter(tags__id__in=tag_query).distinct()
+        artworks = artworks.filter(tags__id__in=tag_query).distinct()
         for tag in tag_query:
             artworks = artworks.filter(tags__id=tag)
-    else:
-        artworks = Artwork.objects.all()
 
     return render(request, 'search.html', {'artworks': artworks})

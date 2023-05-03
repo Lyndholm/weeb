@@ -16,6 +16,9 @@ class Artwork(models.Model):
     )
     tags = models.ManyToManyField('Tag', related_name='artworks', blank=True)
 
+    class Meta:
+        ordering = ['-published_at']
+
     def __str__(self):
         return str(self.id)
 
