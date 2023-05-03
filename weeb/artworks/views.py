@@ -21,9 +21,11 @@ def home_page(request):
         )
     )
     all_tags_count = Tag.objects.all().count()
-    popular_tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
-        '-artworks_count'
-    )[:10]
+    popular_tags = (
+        Tag.objects.annotate(artworks_count=Count('artworks'))
+        .filter(artworks_count__gt=0)
+        .order_by('-artworks_count')[:10]
+    )
     context = {
         'artworks': artworks,
         'all_tags_count': all_tags_count,
@@ -89,7 +91,9 @@ def delete_artwork(request, pk):
 
 
 def tags_page(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
+        '-artworks_count'
+    )[:10]
     return render(request, 'tags.html', {'tags': tags})
 
 

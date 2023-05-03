@@ -6,9 +6,7 @@ from users.models import User
 
 class Artwork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='artworks'
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='artworks')
     title = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=1024, null=True, blank=True)
     published_at = models.DateTimeField(auto_now_add=True)
