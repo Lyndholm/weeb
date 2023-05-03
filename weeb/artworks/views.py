@@ -90,6 +90,9 @@ class TagsAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return http.HttpResponseBadRequest()
+
         text = request.POST.get('text', None)
 
         if text is None:
