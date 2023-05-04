@@ -47,19 +47,19 @@
     <div class="pagination">
         <ul>
             {% if artworks.has_previous %}
-            <li><a class="btn" href="?page={{artworks.previous_page_number}}">Назад</a></li>
+            <li><a class="btn" href="?{{request.GET.urlencode}}&page={{artworks.previous_page_number}}">Назад</a></li>
             {% endif %}
 
             {% for i in artworks.paginator.page_range %}
             {% if i == artworks.number %}
             <li><span class="btn btn--current">{{i}}</span></li>
             {% elif i > artworks.number|add:'-3' and i < artworks.number|add:'3' %}
-            <li><a class="btn" href="?page={{i}}">{{i}}</a></li>
+            <li><a class="btn" href="?{{request.GET.urlencode}}&page={{i}}">{{i}}</a></li>
             {% endif %}
             {% endfor %}
 
             {% if artworks.has_next %}
-            <li><a class="btn" href="?page={{artworks.next_page_number}}">Вперед</a></li>
+            <li><a class="btn" href="?{{request.GET.urlencode}}&page={{artworks.next_page_number}}">Вперед</a></li>
             {% endif %}
         </ul>
     </div>

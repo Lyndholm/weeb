@@ -9,14 +9,16 @@ from .forms import ArtworkCreateForm, ArtworkEditForm, SearchByTagsForm
 from .models import Artwork, Tag
 
 
+def paginate(request, object_list, per_page, query_param='page'):
+    page = request.GET.get(query_param)
+    paginator = Paginator(object_list, per_page)
+
+    return paginator.get_page(page)
+
+
 def home_page(request):
     artworks = Artwork.objects.all()
-
-    per_page = 10
-    paginator = Paginator(artworks, per_page)
-
-    page = request.GET.get('page')
-    artworks = paginator.get_page(page)
+    artworks = paginate(request, artworks, 10)
 
     all_tags_count = Tag.objects.all().count()
     popular_tags = (
@@ -141,5 +143,7 @@ def search_page(request):
         artworks = artworks.filter(tags__id__in=tag_query).distinct()
         for tag in tag_query:
             artworks = artworks.filter(tags__id=tag)
+
+    artworks = paginate(request, artworks, 10)
 
     return render(request, 'search.html', {'artworks': artworks})
