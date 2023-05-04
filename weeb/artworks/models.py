@@ -19,6 +19,9 @@ class Artwork(models.Model):
     class Meta:
         ordering = ['-published_at']
 
+    def is_favored_by_user(self, user):
+        return self.favored_by.filter(user=user).exists()
+
     def __str__(self):
         return str(self.id)
 

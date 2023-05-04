@@ -3,10 +3,10 @@ from django import http
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ArtworkCreateForm, ArtworkEditForm, SearchByTagsForm
-from .models import Artwork, Tag
+from .models import Artwork, FavoriteArtwork, Tag
 
 
 def paginate(request, object_list, per_page, query_param='page'):
@@ -88,6 +88,26 @@ def delete_artwork(request, pk):
 
     context = {'obj': f'арт "{artwork.title}"'}
     return render(request, 'delete.html', context)
+
+
+@login_required(login_url='login')
+def favorite_artwork(request, pk):
+    artwork = get_object_or_404(Artwork, id=pk)
+    favorite, created = FavoriteArtwork.objects.get_or_create(
+        user=request.user, artwork=artwork
+    )
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='login')
+def unfavorite_artwork(request, pk):
+    artwork = get_object_or_404(Artwork, id=pk)
+    try:
+        favorite = FavoriteArtwork.objects.get(user=request.user, artwork=artwork)
+        favorite.delete()
+    except FavoriteArtwork.DoesNotExist:
+        pass
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 class TagsAutocomplete(autocomplete.Select2QuerySetView):

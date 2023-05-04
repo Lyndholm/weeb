@@ -7,8 +7,10 @@ urlpatterns = [
 
     path('artwork/<uuid:pk>/', views.artwork_page, name='artwork'),
     path('artwork/create/', views.create_artwork, name='artwork-create'),
-    path('artwork/edit/<uuid:pk>/', views.edit_artwork, name='artwork-edit'),
-    path('artwork/delete/<uuid:pk>/', views.delete_artwork, name='artwork-delete'),
+    path('artwork/<uuid:pk>/edit/', views.edit_artwork, name='artwork-edit'),
+    path('artwork/<uuid:pk>/delete/', views.delete_artwork, name='artwork-delete'),
+    path('artwork/<uuid:pk>/favorite/', views.favorite_artwork, name='artwork-favorite'),
+    path('artwork/<uuid:pk>/unfavorite/', views.unfavorite_artwork, name='artwork-unfavorite'),
 
     path('tags/', views.tags_page, name='tags'),
 
