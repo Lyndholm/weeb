@@ -121,7 +121,7 @@ class TagsAutocomplete(autocomplete.Select2QuerySetView):
 def tags_page(request):
     tags = Tag.objects.annotate(artworks_count=Count('artworks')).order_by(
         '-artworks_count'
-    )[:10]
+    )
 
     form = SearchByTagsForm(request.GET)
     return render(request, 'tags.html', {'tags': tags, 'search_form': form})

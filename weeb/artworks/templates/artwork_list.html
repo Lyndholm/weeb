@@ -20,9 +20,9 @@
     <div class="artworkList__header">
         <div style="margin-right: 10px;">
             <h2>Галерея артов</h2>
-            <p>{{artworks.paginator.count|default:artworks.count}}
-                {{artworks.paginator.count|default:artworks.count|pluralize_ru:"арт,арта,артов"}}
-                {{artworks.paginator.count|default:artworks.count|pluralize:"доступен,доступно"}}</p>
+            {% with artworks.paginator.count|default:artworks.count|default:0 as arts_count %}
+            <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}} {{arts_count|pluralize:"доступен,доступно"}}</p>
+            {% endwith %}
         </div>
 
         {% if request.user.is_authenticated %}
@@ -55,12 +55,12 @@
             <li><span class="btn btn--current">{{i}}</span></li>
             {% elif i > artworks.number|add:'-3' and i < artworks.number|add:'3' %}
             <li><a class="btn" href="?{{request.GET.urlencode}}&page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
+                {% endif %}
+                {% endfor %}
 
-            {% if artworks.has_next %}
-            <li><a class="btn" href="?{{request.GET.urlencode}}&page={{artworks.next_page_number}}">Вперед</a></li>
-            {% endif %}
+                {% if artworks.has_next %}
+                <li><a class="btn" href="?{{request.GET.urlencode}}&page={{artworks.next_page_number}}">Вперед</a></li>
+                {% endif %}
         </ul>
     </div>
     {% endif %}
