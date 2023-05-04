@@ -937,3 +937,32 @@ a {
 .delete-item.layout .layout__box {
     max-width: 68rem;
 }
+
+/*========== pagination ==========*/
+
+.pagination {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.pagination>ul {
+    flex-wrap: wrap;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.pagination .btn {
+    color: var(--color-sub);
+    border: 1px solid;
+    border-color: var(--color-dark-medium);
+    background-color: var(--color-dark);
+}
+
+.pagination .btn.btn--current {
+    color: var(--color-light);
+    border: 2px solid;
+    border-color: var(--color-main);
+}

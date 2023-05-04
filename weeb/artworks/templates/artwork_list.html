@@ -20,8 +20,9 @@
     <div class="artworkList__header">
         <div style="margin-right: 10px;">
             <h2>Галерея артов</h2>
-            <p>{{artworks.count}} {{artworks.count|pluralize_ru:"арт,арта,артов"}}
-                {{artworks.count|pluralize:"доступен,доступно"}}</p>
+            <p>{{artworks.paginator.count|default:artworks.count}}
+                {{artworks.paginator.count|default:artworks.count|pluralize_ru:"арт,арта,артов"}}
+                {{artworks.paginator.count|default:artworks.count|pluralize:"доступен,доступно"}}</p>
         </div>
 
         {% if request.user.is_authenticated %}
@@ -41,4 +42,26 @@
         {% include 'artwork_component.html' %}
         {% endfor %}
     </div>
+
+    {% if artworks.has_other_pages %}
+    <div class="pagination">
+        <ul>
+            {% if artworks.has_previous %}
+            <li><a class="btn" href="?page={{artworks.previous_page_number}}">Назад</a></li>
+            {% endif %}
+
+            {% for i in artworks.paginator.page_range %}
+            {% if i == artworks.number %}
+            <li><span class="btn btn--current">{{i}}</span></li>
+            {% elif i > artworks.number|add:'-3' and i < artworks.number|add:'3' %}
+            <li><a class="btn" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if artworks.has_next %}
+            <li><a class="btn" href="?page={{artworks.next_page_number}}">Вперед</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
 </div>

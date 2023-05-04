@@ -1,6 +1,7 @@
 from dal import autocomplete
 from django import http
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.shortcuts import redirect, render
 
@@ -10,6 +11,13 @@ from .models import Artwork, Tag
 
 def home_page(request):
     artworks = Artwork.objects.all()
+
+    per_page = 10
+    paginator = Paginator(artworks, per_page)
+
+    page = request.GET.get('page')
+    artworks = paginator.get_page(page)
+
     all_tags_count = Tag.objects.all().count()
     popular_tags = (
         Tag.objects.annotate(artworks_count=Count('artworks'))
