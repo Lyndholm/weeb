@@ -3,7 +3,7 @@ from django import template
 register = template.Library()
 
 
-@register.filter
+@register.filter(name='pluralize_ru')
 def pluralize_ru(value, variants):
     variants = variants.split(',')
     value = abs(int(value))
@@ -18,3 +18,8 @@ def pluralize_ru(value, variants):
         variant = 2
 
     return variants[variant]
+
+
+@register.filter(name='is_favored_by_user')
+def is_favored_by_user(artwork, user):
+    return artwork.is_favored_by_user(user)
