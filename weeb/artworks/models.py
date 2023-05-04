@@ -23,6 +23,24 @@ class Artwork(models.Model):
         return str(self.id)
 
 
+class FavoriteArtwork(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='favorite_artworks'
+    )
+    artwork = models.ForeignKey(
+        Artwork, on_delete=models.CASCADE, related_name='favored_by'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'artwork'], name='unique_favorite')
+        ]
+
+    def __str__(self):
+        return f'{self.artwork.title} favored by {self.user.username}'
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=64, null=False, blank=False)
     created_by = models.ForeignKey(
