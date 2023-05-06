@@ -30,13 +30,13 @@
         </div>
 
         <h2 style="text-align: center; font-size: large; padding: 10px;" id="grid-title">Арты {{user.profile.nickname}}</h2>
-        <div class="artworList-grid-container" id="user-artworks-grid">
+        <div class="artworkList-grid-container" id="user-artworks-grid">
             {% for artwork in user.artworks.all %}
             {% include 'artwork_component.html' %}
             {% endfor %}
         </div>
 
-        <div class="artworList-grid-container" id="user-favorites-grid" style="display: none;">
+        <div class="artworkList-grid-container" id="user-favorites-grid" style="display: none;">
             {% for artwork in user.favorite_artworks.all %}
             {% with artwork.artwork as artwork %}
             {% include 'artwork_component.html' %}
