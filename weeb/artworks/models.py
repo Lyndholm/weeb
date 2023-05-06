@@ -20,8 +20,30 @@ class Artwork(models.Model):
     class Meta:
         ordering = ['-published_at']
 
+    def is_favored_by_user(self, user):
+        return self.favored_by.filter(user=user).exists()
+
     def __str__(self):
         return str(self.id)
+
+
+class FavoriteArtwork(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='favorite_artworks'
+    )
+    artwork = models.ForeignKey(
+        Artwork, on_delete=models.CASCADE, related_name='favored_by'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'artwork'], name='unique_favorite')
+        ]
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.artwork.title} favored by {self.user.username}'
 
 
 class Tag(models.Model):

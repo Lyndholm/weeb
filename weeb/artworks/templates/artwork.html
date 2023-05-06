@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load artworks_extras %}
+
 {% block content %}
 <main class="layout layout--2">
     <div class="container">
@@ -70,6 +72,16 @@
                 </div>
                 <img src="{{artwork.file.file.url}}">
             </div>
+
+            {% if request.user.is_authenticated %}
+            <div class="artwork-top-bar">
+                {% if artwork|is_favored_by_user:request.user %}
+                <a class="btn btn-favorite remove" href="{% url 'artwork-unfavorite' artwork.id %}">💔</a>
+                {% else %}
+                <a class="btn btn-favorite add" href="{% url 'artwork-favorite' artwork.id %}">❤</a>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
 
         <div class="artwork-tags">

@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Artwork, ImageFile, Tag
+from . import models
 
-admin.site.register(Artwork)
-admin.site.register(ImageFile)
-admin.site.register(Tag)
+admin.site.register(models.Artwork)
+admin.site.register(models.FavoriteArtwork)
+admin.site.register(models.ImageFile)
+admin.site.register(models.Tag)

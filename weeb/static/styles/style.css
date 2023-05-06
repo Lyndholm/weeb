@@ -129,6 +129,32 @@ a {
     border: 2px solid var(--color-main);
 }
 
+.btn-favorite {
+    border-radius: 10rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 6px 2.5rem;
+    color: white;
+}
+
+.btn-favorite.add {
+    background-color: var(--color-main);
+}
+
+.btn-favorite.add:hover::after {
+    content: "Добавить в Избранное";
+    position: relative;
+}
+
+.btn-favorite.remove {
+    background-color: var(--color-dark-medium);
+}
+
+.btn-favorite.remove:hover::after {
+    content: "Удалить из Избранного";
+    position: relative;
+}
+
 .action-button {
     background: transparent;
     border: none;
@@ -639,7 +665,7 @@ a {
     }
 }
 
-.artworList-grid-container {
+.artworkList-grid-container {
     display: grid;
     grid-gap: 2.4rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -732,7 +758,7 @@ a {
 
 .artworkListArt__tags {
     color: var(--color-light-gray);
-    display: flex;
+    display: block;
     align-items: center;
     gap: 1rem;
     font-size: 1.4rem;
@@ -901,6 +927,11 @@ a {
     max-height: 100vh;
     /* overflow-y: auto; */
     padding-bottom: 0;
+}
+
+.artwork__box>img {
+    max-height: 80vh;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 500px) {
