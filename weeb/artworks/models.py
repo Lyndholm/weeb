@@ -9,6 +9,7 @@ class Artwork(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='artworks')
     title = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=1024, null=True, blank=True)
+    source = models.CharField(max_length=256, null=True, blank=True)
     published_at = models.DateTimeField(auto_now_add=True)
 
     file = models.ForeignKey(

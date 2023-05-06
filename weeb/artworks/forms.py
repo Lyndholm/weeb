@@ -14,6 +14,7 @@ class ArtworkCreateForm(forms.ModelForm):
         fields = (
             'title',
             'description',
+            'source',
             'tags',
         )
         widgets = {
@@ -45,6 +46,7 @@ class ArtworkEditForm(forms.ModelForm):
         fields = (
             'title',
             'description',
+            'source',
             'tags',
         )
         widgets = {
