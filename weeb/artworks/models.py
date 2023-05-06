@@ -39,6 +39,7 @@ class FavoriteArtwork(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['user', 'artwork'], name='unique_favorite')
         ]
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'{self.artwork.title} favored by {self.user.username}'
