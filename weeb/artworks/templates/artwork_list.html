@@ -19,7 +19,7 @@
 
     <div class="artworkList__header">
         <div style="margin-right: 10px;">
-            <h2>Галерея артов</h2>
+            <h2>{{artworkList__header|default:"Галерея артов"}}</h2>
             {% with artworks.paginator.count|default:artworks.count|default:0 as arts_count %}
             <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}} {{arts_count|pluralize:"доступен,доступно"}}</p>
             {% endwith %}
@@ -39,7 +39,13 @@
 
     <div class="artworList-grid-container">
         {% for artwork in artworks %}
-        {% include 'artwork_component.html' %}
+            {% if artwork.artwork %}
+                {% with artwork.artwork as artwork %}    
+                    {% include 'artwork_component.html' %}
+                {% endwith %}
+            {% else %}
+                {% include 'artwork_component.html' %}
+            {% endif %}
         {% endfor %}
     </div>
 

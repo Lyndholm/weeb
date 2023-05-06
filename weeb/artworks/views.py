@@ -91,6 +91,12 @@ def delete_artwork(request, pk):
 
 
 @login_required(login_url='login')
+def user_favorite_artworks(request):
+    context = {'artworks': request.user.favorite_artworks.all()}
+    return render(request, 'artwork_favorites.html', context)
+
+
+@login_required(login_url='login')
 def favorite_artwork(request, pk):
     artwork = get_object_or_404(Artwork, id=pk)
     favorite, created = FavoriteArtwork.objects.get_or_create(

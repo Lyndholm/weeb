@@ -12,6 +12,8 @@ urlpatterns = [
     path('artwork/<uuid:pk>/favorite/', views.favorite_artwork, name='artwork-favorite'),
     path('artwork/<uuid:pk>/unfavorite/', views.unfavorite_artwork, name='artwork-unfavorite'),
 
+    path('favorite/', views.user_favorite_artworks, name='favorite-artworks'),
+
     path('tags/', views.tags_page, name='tags'),
 
     path('search/', views.search_page, name='search'),
