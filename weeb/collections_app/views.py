@@ -15,6 +15,12 @@ def collections_home_page(request):
     return render(request, 'collections.html', context)
 
 
+def collection_page(request, pk):
+    collection = Collection.objects.get(id=pk)
+    context = {'collection': collection}
+    return render(request, 'collection.html', context)
+
+
 @login_required(login_url='login')
 def user_collections(request):
     context = {'collections': request.user.collections.all()}

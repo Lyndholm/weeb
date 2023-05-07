@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% load artworks_extras %}
+
+{% block content %}
+
+<main class="layout">
+    <div class="container" style="display: block;">
+        <div class="artworkList">
+            {% include 'mobile_menu.html' %}
+
+            <div class="artworkList__header">
+                <div style="margin-right: 10px;">
+                    <h2>Арты в коллекции {{collection.name}}</h2>
+                    {% with collection.artworks.paginator.count|default:collection.artworks.count|default:0 as arts_count %}
+                    <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}}
+                        {{arts_count|pluralize:"доступен,доступно"}}</p>
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div style="padding-bottom: 1rem;">
+                <p>{{collection.description}}</p>
+            </div>
+
+            <div class="artworkList-grid-container">
+                {% for collection_art in collection.artworks.all %}
+                {% with collection_art.artwork as artwork %}
+                {% include 'artwork_component.html' %}
+                {% endwith %}
+                {% endfor %}
+            </div>
+
+            {% if artworks.has_other_pages %}
+            {% include 'pagination.html' with paginatable=artworks %}
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

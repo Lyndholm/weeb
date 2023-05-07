@@ -1,3 +1,5 @@
+{% load artworks_extras %}
+
 <div class="artworkListArt">
     <div class="artworkListArt__header">
         <a href="{% url 'user-profile' collection.author.id %}" class="artworkListArt__author">
@@ -37,8 +39,8 @@
         {% endif %}
     </div>
     <div class="artworkListArt__content" style="display: inline-grid;">
-        <a href="">{{collection.name}}</a>
-        <a href=""><img src="{{collection.cover_image.url}}"></a>
+        <a href="{% url 'collection' collection.id %}">{{collection.name}}</a>
+        <a href="{% url 'collection' collection.id %}"><img src="{{collection.cover_image.url}}"></a>
     </div>
     <div class="artworkListArt__meta">
         <div class="artworkListArt__tags">
@@ -51,5 +53,6 @@
             </svg>
             {{collection.description|slice:":50"}}
         </div>
+        <p class="artworkListArt__topic">{{collection.artworks.count}} {{collection.artworks.count|pluralize_ru:"арт,арта,артов"}}</p>
     </div>
 </div>
