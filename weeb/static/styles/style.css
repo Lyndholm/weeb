@@ -104,6 +104,11 @@ a {
     color: var(--color-dark);
 }
 
+.btn--delete {
+    background-color: red;
+    color: white;
+}
+
 .btn:hover {
     opacity: 0.9;
 }
@@ -337,7 +342,9 @@ a {
 }
 
 @media screen and (max-width: 500px) {
-    .header__search, .header__navigation {
+
+    .header__search,
+    .header__navigation {
         display: none;
     }
 }
