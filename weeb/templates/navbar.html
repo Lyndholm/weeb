@@ -20,6 +20,11 @@
 
         <nav class="header__menu">
 
+            <!-- <div class="header__navigation">
+                <a href="{% url 'collections' %}" style="color: var(--color-main)">Коллекции</a>
+                <a href="{% url 'favorite-artworks' %}" style="color: var(--color-main)">Избранное</a>
+            </div> -->
+
             {% if request.user.is_authenticated %}
             <!-- Logged In -->
             <div class="header__user">
