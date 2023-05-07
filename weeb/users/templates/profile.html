@@ -27,6 +27,7 @@
         <div class="profile-content-buttons" style="text-align: center;">
             <button class="btn btn--main btn--pill" id="button-artworks">Арты</button>
             <button class="btn btn--main btn--pill" id="button-favorites">Избранное</button>
+            <button class="btn btn--main btn--pill" id="button-collections">Коллекции</button>
         </div>
 
         <h2 style="text-align: center; font-size: large; padding: 10px;" id="grid-title">Арты {{user.profile.nickname}}</h2>
@@ -44,26 +45,43 @@
             {% endfor %}
         </div>
 
+        <div class="artworkList-grid-container" id="user-collections-grid" style="display: none;">
+            {% for collection in user.collections.all %}
+            {% include 'collection_component.html' %}
+            {% endfor %}
+        </div>
+
     </div>
 </main>
 
 <script>
     const buttonArtworks = document.getElementById("button-artworks");
     const buttonFavorites = document.getElementById("button-favorites");
+    const buttonCollections = document.getElementById("button-collections");
     const gridTitle = document.getElementById("grid-title");
     const gridArtworks = document.getElementById("user-artworks-grid");
     const gridFavorites = document.getElementById("user-favorites-grid");
+    const gridCollections = document.getElementById("user-collections-grid");
 
     buttonArtworks.addEventListener("click", function () {
         gridTitle.innerHTML = "Арты {{user.profile.nickname}}";
         gridArtworks.style.display = "grid";
         gridFavorites.style.display = "none";
+        gridCollections.style.display = "none";
     });
 
     buttonFavorites.addEventListener("click", function () {
         gridTitle.innerHTML = "Избранное {{user.profile.nickname}}";
         gridArtworks.style.display = "none";
         gridFavorites.style.display = "grid";
+        gridCollections.style.display = "none";
+    });
+
+    buttonCollections.addEventListener("click", function () {
+        gridTitle.innerHTML = "Коллекции {{user.profile.nickname}}";
+        gridArtworks.style.display = "none";
+        gridFavorites.style.display = "none";
+        gridCollections.style.display = "grid";
     });
 </script>
 
