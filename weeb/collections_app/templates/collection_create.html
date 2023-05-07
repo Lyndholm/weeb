@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="create-artwork layout">
+    <div class="container">
+        <div class="layout__box">
+            <div class="layout__boxHeader">
+                <div class="layout__boxTitle">
+                    <a href="{{request.META.HTTP_REFERER}}">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 32 32">
+                            <path
+                                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                            </path>
+                        </svg>
+                    </a>
+                    <h3>Создать коллекцию</h3>
+                </div>
+            </div>
+            <div class="layout__body">
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <label for="collection_name">Название</label>
+                        {{form.name}}
+                    </div>
+
+                    <div class="form__group">
+                        <label for="collection_description">Описание</label>
+                        {{form.description}}
+                    </div>
+
+                    <div class="form__group">
+                        <label for="collection_cover_image">Обложка</label>
+                        {{form.cover_image}}
+                    </div>
+
+                    <div class="form__group" style="display: flex; gap: 1rem;">
+                        <label for="collection_is_public">Публичная коллекция?</label>
+                        <span>{{form.is_public}}</span>
+                    </div>
+
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Отмена</a>
+                        <button class="btn btn--main" type="submit">Создать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
