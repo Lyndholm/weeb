@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'artworks.apps.ArtworksConfig',
+    'collections_app.apps.CollectionsAppConfig',
 ]
 
 MIDDLEWARE = [
