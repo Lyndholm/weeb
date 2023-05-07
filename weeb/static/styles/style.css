@@ -479,8 +479,16 @@ a {
         display: none;
     }
 
+    .layout>.container {
+        display: block;
+    }
+
     .layout--2>.container>div:first {
         flex-basis: 100%;
+    }
+
+    .layout--2>.container>div:last-child {
+        margin-top: 1rem;
     }
 }
 
@@ -859,13 +867,6 @@ a {
     border-radius: 0.7rem;
     overflow: auto;
     position: relative;
-}
-
-@media screen and (max-width: 900px) {
-    .layout--2>.container>div:first-child {
-        flex-basis: 100%;
-        margin-right: 10px;
-    }
 }
 
 .artwork-top-bar {
