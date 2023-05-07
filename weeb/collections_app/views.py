@@ -53,3 +53,18 @@ def edit_collection(request, pk):
 
     context = {'form': form}
     return render(request, 'collection_edit.html', context)
+
+
+@login_required(login_url='login')
+def delete_collection(request, pk):
+    collection = Collection.objects.get(id=pk)
+
+    if request.user != collection.author:
+        raise http.Http404  # TODO: Return 403 Forbidden
+
+    if request.method == 'POST':
+        collection.delete()
+        return redirect('collections')
+
+    context = {'obj': f'коллекцию "{collection.name}"'}
+    return render(request, 'delete.html', context)
