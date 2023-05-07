@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="layout">
+    <div class="container" style="display: block;">
+        {% include 'collection_list.html' with artworkList__header="Ваши коллекции" %}
+    </div>
+</main>
+{% endblock content %}

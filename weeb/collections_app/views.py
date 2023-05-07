@@ -15,6 +15,12 @@ def collections_home_page(request):
 
 
 @login_required(login_url='login')
+def user_collections(request):
+    context = {'collections': request.user.collections.all()}
+    return render(request, 'users_collections.html', context)
+
+
+@login_required(login_url='login')
 def create_collection(request):
     form = CollectionCreateForm()
 
