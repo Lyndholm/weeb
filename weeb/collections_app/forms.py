@@ -22,3 +22,13 @@ class CollectionCreateForm(forms.ModelForm):
             self.save_m2m()
 
         return collection
+
+
+class CollectionEditForm(forms.ModelForm):
+    class Meta:
+        model = Collection
+        fields = (
+            'name',
+            'description',
+            'is_public',
+        )

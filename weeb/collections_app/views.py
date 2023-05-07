@@ -1,8 +1,9 @@
 from artworks.views import paginate
+from django import http
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
-from .forms import CollectionCreateForm
+from .forms import CollectionCreateForm, CollectionEditForm
 from .models import Collection
 
 
@@ -33,3 +34,22 @@ def create_collection(request):
 
     context = {'form': form}
     return render(request, 'collection_create.html', context)
+
+
+@login_required(login_url='login')
+def edit_collection(request, pk):
+    collection = Collection.objects.get(id=pk)
+    form = CollectionEditForm(instance=collection)
+
+    if request.user != collection.author:
+        raise http.Http404  # TODO: Raise 403 Forbidden
+
+    if request.method == 'POST':
+        # TODO: Ability for editing collection cover image?
+        form = CollectionEditForm(request.POST, request.FILES, instance=collection)
+        if form.is_valid():
+            collection = form.save()
+            return redirect('collections')
+
+    context = {'form': form}
+    return render(request, 'collection_edit.html', context)
