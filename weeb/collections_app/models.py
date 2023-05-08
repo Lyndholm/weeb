@@ -40,6 +40,7 @@ class CollectionArtwork(models.Model):
                 fields=['collection', 'artwork'], name='unique_collection_artwork'
             )
         ]
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'{self.artwork.title} in {self.collection.name}'
