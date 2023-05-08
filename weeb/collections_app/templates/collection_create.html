@@ -1,7 +1,5 @@
 {% extends 'main.html' %}
 
-{% load static %}
-
 {% block content %}
 <main class="create-artwork layout">
     <div class="container">
@@ -16,7 +14,7 @@
                             </path>
                         </svg>
                     </a>
-                    <h3>Редактирование арта</h3>
+                    <h3>Создать коллекцию</h3>
                 </div>
             </div>
             <div class="layout__body">
@@ -24,38 +22,32 @@
                     {% csrf_token %}
 
                     <div class="form__group">
-                        <label for="artwork_title">Название</label>
-                        {{form.title}}
+                        <label for="collection_name">Название</label>
+                        {{form.name}}
                     </div>
 
                     <div class="form__group">
-                        <label for="artwork_description">Описание</label>
+                        <label for="collection_description">Описание</label>
                         {{form.description}}
                     </div>
 
                     <div class="form__group">
-                        <label for="artwork_description">Источник</label>
-                        {{form.source}}
-                        <span class="form-field-help-text">Первоисточник арта. Например, ссылка на автора.</span>
+                        <label for="collection_cover_image">Обложка</label>
+                        {{form.cover_image}}
                     </div>
 
-                    <div class="form__group">
-                        <label for="artwork_tags">Теги</label>
-                        {{form.tags}}
+                    <div class="form__group" style="display: flex; gap: 1rem;">
+                        <label for="collection_is_public">Публичная коллекция?</label>
+                        <span>{{form.is_public}}</span>
                     </div>
-
 
                     <div class="form__action">
                         <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Отмена</a>
-                        <button class="btn btn--main" type="submit">Сохранить</button>
+                        <button class="btn btn--main" type="submit">Создать</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </main>
-
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-{{form.media}}
-
 {% endblock content %}

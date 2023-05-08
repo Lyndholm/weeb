@@ -3,7 +3,7 @@
 {% block content %}
 <main class="delete-item layout">
     <div class="container">
-        <div class="layout__box" style="min-height: auto;">
+        <div class="layout__box">
             <div class="layout__boxHeader">
                 <div class="layout__boxTitle">
                     <h3>Подтвердите действие</h3>
@@ -18,8 +18,7 @@
 
                     <div class="form__action">
                         <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Отмена</a>
-                        <button class="btn" type="submit"
-                            style="background-color: rgb(255, 0, 0); color:white;">Удалить</button>
+                        <button class="btn btn--delete" type="submit">Удалить</button>
                     </div>
 
                 </form>

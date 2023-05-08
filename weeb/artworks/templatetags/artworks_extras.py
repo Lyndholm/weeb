@@ -23,3 +23,8 @@ def pluralize_ru(value, variants):
 @register.filter(name='is_favored_by_user')
 def is_favored_by_user(artwork, user):
     return artwork.is_favored_by_user(user)
+
+
+@register.filter(name='in_collection')
+def in_collection(artwork, collection):
+    return artwork in [art.artwork for art in collection.artworks.all()]

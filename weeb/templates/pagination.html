@@ -1,0 +1,19 @@
+<div class="pagination">
+    <ul>
+        {% if paginatable.has_previous %}
+        <li><a class="btn" href="?{{request.GET.urlencode}}&page={{paginatable.previous_page_number}}">Назад</a></li>
+        {% endif %}
+
+        {% for i in paginatable.paginator.page_range %}
+        {% if i == paginatable.number %}
+        <li><span class="btn btn--current">{{i}}</span></li>
+        {% elif i > paginatable.number|add:'-3' and i < paginatable.number|add:'3' %}
+        <li><a class="btn" href="?{{request.GET.urlencode}}&page={{i}}">{{i}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if paginatable.has_next %}
+        <li><a class="btn" href="?{{request.GET.urlencode}}&page={{paginatable.next_page_number}}">Вперед</a></li>
+        {% endif %}
+    </ul>
+</div>
