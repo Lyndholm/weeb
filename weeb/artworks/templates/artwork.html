@@ -80,6 +80,36 @@
                 {% else %}
                 <a class="btn btn-favorite add" href="{% url 'artwork-favorite' artwork.id %}">❤</a>
                 {% endif %}
+
+                <dialog id="add-to-collection-modal" class="layout__box">
+                    <div class="layout__body">
+                        <form class="form">
+                            <div class="form__group">
+                                <label style="color: var(--color-light-gray);">Добавить арт в коллекцию...</label>
+                                <select id="collections-select">
+                                    <option>Выберите коллекцию</option>
+                                    {% for collection in request.user.collections.all %}
+                                    {% if not artwork|in_collection:collection %}
+                                    <option value="{{ collection.id }}">{{ collection.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <span class="form-field-help-text">Коллекции не будет в списке, если в ней уже есть этот арт.</span>
+                            </div>
+                            <div>
+                                <button class="btn btn--dark" formmethod="dialog">Отмена</button>
+                                <button class="btn btn--main" id="modal-confirm-button">Сохранить</button>
+                            </div>
+                        </form>
+                        <input type="hidden" id="artwork-pk" value="{{artwork.id}}">
+                    </div>
+                </dialog>
+                <button id="showDialog" class="btn btn--main">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+                        <path
+                            d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
+                    </svg>
+                </button>
             </div>
             {% endif %}
         </div>
@@ -100,4 +130,37 @@
         </div>
     </div>
 </main>
+
+<script>
+    const showModalButton = document.getElementById('showDialog');
+    const addToCollectionModal = document.getElementById('add-to-collection-modal');
+    const selectElement = addToCollectionModal.querySelector('#collections-select');
+    const confirmButton = addToCollectionModal.querySelector('#modal-confirm-button');
+    const artworkPK = document.getElementById('artwork-pk').value;
+    const uuidRegexExp = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+    showModalButton.addEventListener('click', () => {
+        addToCollectionModal.showModal();
+    });
+
+    confirmButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const collectionUUID = selectElement.value;
+        if (uuidRegexExp.test(collectionUUID)) {
+            const xhr = new XMLHttpRequest();
+            const url = `/collections/${collectionUUID}/add/?artwork=${artworkPK}`;
+
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send();
+        }
+
+        addToCollectionModal.close(selectElement.value);
+    });
+</script>
 {% endblock content %}
