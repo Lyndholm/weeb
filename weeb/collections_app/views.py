@@ -1,10 +1,11 @@
+from artworks.models import Artwork
 from artworks.views import paginate
 from django import http
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CollectionCreateForm, CollectionEditForm
-from .models import Collection
+from .models import Collection, CollectionArtwork
 
 
 def collections_home_page(request):
@@ -74,3 +75,27 @@ def delete_collection(request, pk):
 
     context = {'obj': f'коллекцию "{collection.name}"'}
     return render(request, 'delete.html', context)
+
+
+@login_required(login_url='login')
+def add_artwork_to_collection(request, pk):
+    artwork_id = request.GET.get('artwork')
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    collection = get_object_or_404(Collection, pk=pk, author=request.user)
+    art, created = CollectionArtwork.objects.get_or_create(
+        collection=collection, artwork=artwork
+    )
+    return http.HttpResponse(status=201)
+
+
+@login_required(login_url='login')
+def remove_artwork_from_collection(request, pk):
+    artwork_id = request.GET.get('artwork')
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    collection = get_object_or_404(Collection, pk=pk, author=request.user)
+    try:
+        art = CollectionArtwork.objects.get(collection=collection, artwork=artwork)
+        art.delete()
+    except CollectionArtwork.DoesNotExist:
+        pass
+    return http.HttpResponse(status=204)
