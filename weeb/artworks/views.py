@@ -125,6 +125,9 @@ class TagsAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+    def has_add_permission(self, request):
+        return request.user.is_authenticated
+
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return http.HttpResponseBadRequest()
