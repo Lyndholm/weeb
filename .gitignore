@@ -3,3 +3,5 @@ __pycache__/
 *.sqlite3
 media/
 !media/avatar-default.svg
+.env
+.env.db
