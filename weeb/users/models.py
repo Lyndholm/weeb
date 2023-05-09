@@ -4,16 +4,16 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+def uploaded_avatars_directory_path(instance, filename):
+    file_extension = filename.split('.')[-1]
+    return f'avatars/{instance.pk}.{file_extension}'
+
+
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=32, unique=True, blank=False)
     email = models.EmailField(unique=True, blank=False, null=False)
     created_at = models.DateTimeField('Registration date', auto_now_add=True)
-
-
-def uploaded_avatars_directory_path(instance, filename):
-    file_extension = filename.split('.')[-1]
-    return f'uploads/{instance.pk}.{file_extension}'
 
 
 class Profile(models.Model):
