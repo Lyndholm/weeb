@@ -1,8 +1,13 @@
 import uuid
 
-from artworks.models import Artwork, uploaded_images_directory_path
+from artworks.models import Artwork
 from django.db import models
 from users.models import User
+
+
+def uploaded_collection_covers_directory_path(instance, filename):
+    file_extension = filename.split('.')[-1]
+    return f'collection_covers/{instance.id}.{file_extension}'
 
 
 class Collection(models.Model):
@@ -13,7 +18,7 @@ class Collection(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=1024, null=True, blank=True)
     cover_image = models.ImageField(
-        upload_to=uploaded_images_directory_path, null=False, blank=False
+        upload_to=uploaded_collection_covers_directory_path, null=False, blank=False
     )
     is_public = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
