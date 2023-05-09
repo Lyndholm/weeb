@@ -4,6 +4,11 @@ from django.db import models
 from users.models import User
 
 
+def uploaded_artfiles_directory_path(instance, filename):
+    file_extension = filename.split('.')[-1]
+    return f'artworks/{instance.id}.{file_extension}'
+
+
 class Artwork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='artworks')
@@ -57,15 +62,10 @@ class Tag(models.Model):
         return self.name
 
 
-def uploaded_images_directory_path(instance, filename):
-    file_extension = filename.split('.')[-1]
-    return f'uploads/{instance.id}.{file_extension}'
-
-
 class ImageFile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     file = models.ImageField(
-        upload_to=uploaded_images_directory_path, null=False, blank=False
+        upload_to=uploaded_artfiles_directory_path, null=False, blank=False
     )
     uploaded_by = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='uploaded_image_files'
