@@ -1001,6 +1001,7 @@ dialog::backdrop {
     border: 1px solid;
     border-color: var(--color-dark-medium);
     background-color: var(--color-dark);
+    height: 4.75rem;
 }
 
 .pagination .btn.btn--current {
