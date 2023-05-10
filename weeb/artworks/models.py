@@ -52,7 +52,7 @@ class FavoriteArtwork(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=64, null=False, blank=False)
+    name = models.CharField(max_length=64, null=False, blank=False, unique=True)
     created_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name='created_tags'
     )
