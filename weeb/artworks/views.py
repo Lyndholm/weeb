@@ -18,7 +18,7 @@ def paginate(request, object_list, per_page, query_param='page'):
 
 def home_page(request):
     artworks = Artwork.objects.all()
-    artworks = paginate(request, artworks, 10)
+    artworks = paginate(request, artworks, 15)
 
     all_tags_count = Tag.objects.all().count()
     popular_tags = (
