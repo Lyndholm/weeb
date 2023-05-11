@@ -93,9 +93,9 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_URL = 'login'
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
