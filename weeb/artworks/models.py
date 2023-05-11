@@ -62,15 +62,23 @@ class Tag(models.Model):
         return self.name
 
 
+# TODO: Create a mixin for image models with file and compressed_file fields?
 class ImageFile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     file = models.ImageField(
         upload_to=uploaded_artfiles_directory_path, null=False, blank=False
     )
+    compressed_file = models.ImageField(
+        upload_to=uploaded_artfiles_directory_path, null=True, blank=True
+    )
     uploaded_by = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='uploaded_image_files'
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def thumbnail(self):
+        return self.compressed_file or self.file
 
     def __str__(self):
         return str(self.id)

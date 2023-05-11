@@ -14,7 +14,7 @@
     </div>
     <div class="artworkListArt__content" style="display: inline-grid;">
         <a href="{% url 'artwork' artwork.id %}">{{artwork.title}}</a>
-        <a href="{% url 'artwork' artwork.id %}"><img src="{{artwork.file.file.url}}"></a>
+        <a href="{% url 'artwork' artwork.id %}"><img src="{{artwork.file.thumbnail.url}}"></a>
     </div>
     <div class="artworkListArt__meta">
         <div class="artworkListArt__tags">
