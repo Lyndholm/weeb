@@ -1,6 +1,6 @@
 <div class="pagination">
     <ul>
-        {% if paginatable.paginator.num_pages > 3 and paginatable.number > 3 %}
+        {% if paginatable.paginator.num_pages > 5 and paginatable.number > 5 %}
         <li><a class="btn" href="?{{request.GET.urlencode}}&page=1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                     <path
@@ -25,7 +25,7 @@
         {% for i in paginatable.paginator.page_range %}
         {% if i == paginatable.number %}
         <li><span class="btn btn--current">{{i}}</span></li>
-        {% elif i > paginatable.number|add:'-3' and i < paginatable.number|add:'3' %}
+        {% elif i > paginatable.number|add:'-5' and i < paginatable.number|add:'5' %}
         <li><a class="btn" href="?{{request.GET.urlencode}}&page={{i}}">{{i}}</a></li>
         {% endif %}
         {% endfor %}
@@ -40,7 +40,7 @@
         </li>
         {% endif %}
 
-        {% if paginatable.paginator.num_pages > 3 and paginatable.number < paginatable.paginator.num_pages|add:'-2'%}
+        {% if paginatable.paginator.num_pages > 5 and paginatable.number < paginatable.paginator.num_pages|add:'-4'%}
         <li><a class="btn" href="?{{request.GET.urlencode}}&page={{paginatable.paginator.num_pages}}">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                     <path
