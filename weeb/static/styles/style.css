@@ -255,18 +255,18 @@ dialog::backdrop {
 .header__logo,
 .header__user {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
 .header__logo>img {
-    height: 3.2rem;
-    width: 3.2rem;
+    height: 4.2rem;
+    width: 4.2rem;
 }
 
 .header__logo>h1 {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--color-light);
 }
 
@@ -296,6 +296,7 @@ dialog::backdrop {
 
 .header__menu p {
     line-height: 1.2;
+    font-size: 1.75rem;
 }
 
 .header__menu span {
