@@ -34,11 +34,15 @@
 
         {% if request.user.is_authenticated %}
         <div class="artworkListArt__favorite-button">
-            {% if artwork|is_favored_by_user:request.user %}
-            <a class="btn btn-favorite remove" href="{% url 'artwork-unfavorite' artwork.id %}">💔</a>
-            {% else %}
-            <a class="btn btn-favorite add" href="{% url 'artwork-favorite' artwork.id %}">❤</a>
-            {% endif %}
+            <button
+                class="btn btn-favorite {% if artwork|is_favored_by_user:request.user %}remove{% else %}add{% endif %}"
+                id="favoriteButton{{ artwork.id }}" onclick="toggleFavorite('{{ artwork.id }}')">
+                {% if artwork|is_favored_by_user:request.user %}
+                💔
+                {% else %}
+                ❤
+                {% endif %}
+            </button>
         </div>
         {% endif %}
     </div>
