@@ -47,9 +47,17 @@
                     <!-- TODO: Customize file input form (form-control-file) -->
                     <div class="form__group">
                         <label for="artwork_file">Файл</label>
-                        {{form.file}}
+                        <label class="btn btn--pill" style="width: fit-content;">
+                            Загрузить файл
+                            {{ form.file }}
+                        </label>
                     </div>
 
+                    <div id="preview_container" style="display: none; max-height: 40vh;">
+                        <img id="preview_image" style="object-fit: contain;">
+                    </div>
+                    <label id="file_label" class="form-field-help-text"
+                        style="display: block; text-align: center; margin: 1rem;"></label>
 
                     <div class="form__action">
                         <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Отмена</a>
@@ -64,4 +72,25 @@
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 {{form.media}}
 
+<script>
+    const fileInput = document.querySelector("#id_file");
+    const fileLabel = document.querySelector("#file_label");
+    const previewContainer = document.querySelector("#preview_container");
+    const previewImage = document.querySelector("#preview_image");
+
+    fileInput.addEventListener("change", function (event) {
+        const selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            fileLabel.textContent = selectedFile.name;
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                previewImage.src = reader.result;
+            }
+            reader.readAsDataURL(selectedFile);
+            previewContainer.style.display = "flex";
+        }
+    });
+</script>
 {% endblock content %}
