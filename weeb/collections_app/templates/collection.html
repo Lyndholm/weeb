@@ -11,10 +11,9 @@
 
             <div class="artworkList__header">
                 <div>
-                    <h2>Арты в коллекции {{collection.name}}</h2>
+                    <h2>{{collection.name}}</h2>
                     {% with collection.artworks.paginator.count|default:collection.artworks.count|default:0 as arts_count %}
-                    <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}}
-                        {{arts_count|pluralize_ru:"доступен,доступен,доступно"}}</p>
+                    <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}} в коллекции</p>
                     {% endwith %}
                 </div>
 
