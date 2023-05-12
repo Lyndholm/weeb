@@ -7,7 +7,7 @@
         <div style="margin-right: 10px;">
             <h2>{{artworkList__header|default:"Галерея артов"}}</h2>
             {% with artworks.paginator.count|default:artworks.count|default:0 as arts_count %}
-            <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}} {{arts_count|pluralize:"доступен,доступно"}}</p>
+            <p>{{arts_count}} {{arts_count|pluralize_ru:"арт,арта,артов"}} {{arts_count|pluralize_ru:"доступен,доступен,доступно"}}</p>
             {% endwith %}
         </div>
 
