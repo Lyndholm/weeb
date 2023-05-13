@@ -1,5 +1,4 @@
-FROM nginx:1.23-alpine
+FROM jwilder/nginx-proxy:1.3
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+COPY default_location /etc/nginx/vhost.d/default_location
 COPY robots.txt /usr/share/nginx/html/robots.txt

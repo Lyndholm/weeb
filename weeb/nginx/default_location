@@ -1,0 +1,7 @@
+location / {
+    client_max_body_size 100M;
+}
+
+location /robots.txt {
+    alias /usr/share/nginx/html/robots.txt;
+}
