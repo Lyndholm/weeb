@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from .models import Profile, User
 
 
 @admin.register(User)
-class UserModelAdmin(admin.ModelAdmin):
+class UserModelAdmin(UserAdmin):
     def has_add_permission(self, request):
         return False
 
