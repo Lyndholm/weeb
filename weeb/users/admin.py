@@ -6,6 +6,8 @@ from .models import Profile, User
 
 @admin.register(User)
 class UserModelAdmin(UserAdmin):
+    list_display = ('username', 'email', 'date_joined', 'is_staff')
+
     def has_add_permission(self, request):
         return False
 
